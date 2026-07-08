@@ -1,0 +1,8 @@
+# Ignore local Node.js server files to force static deployment on Vercel
+server.js
+index.js
+migrate.js
+convert.html
+design/
+scratch/
+*.zip
