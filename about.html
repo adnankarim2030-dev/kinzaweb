@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Kinza | From the Kingdom to Pakistan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-card {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .chilled-shadow {
+            box-shadow: 0 20px 40px -15px rgba(49, 77, 160, 0.15);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(243, 146, 0, 0.3);
+        }
+        .timeline-line {
+            background: linear-gradient(to bottom, transparent, #314DA0, #F39200, #84BD00, transparent);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dad9e1",
+                    "inverse-primary": "#b5c4ff",
+                    "deep-navy": "#103A62",
+                    "cola-blue": "#314DA0",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#693c00",
+                    "secondary-fixed-dim": "#ffb86e",
+                    "on-tertiary-fixed": "#131f00",
+                    "surface-variant": "#e3e1e9",
+                    "on-primary-container": "#b5c4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#2c4200",
+                    "pure-white": "#FFFFFF",
+                    "surface-container-low": "#f4f3fa",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "primary-container": "#314da0",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#3e5b00",
+                    "on-primary-fixed": "#00164e",
+                    "orange-burst": "#F39200",
+                    "frost-gray": "#F9FAFB",
+                    "outline": "#757683",
+                    "on-tertiary-container": "#9dd82c",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "lemon-yellow": "#FFD100",
+                    "primary": "#143588",
+                    "on-surface": "#1a1b21",
+                    "tertiary-fixed": "#b8f649",
+                    "on-tertiary-fixed-variant": "#354e00",
+                    "secondary-container": "#fc9910",
+                    "surface-container-highest": "#e3e1e9",
+                    "inverse-on-surface": "#f1f0f8",
+                    "primary-fixed": "#dce1ff",
+                    "secondary": "#8a5100",
+                    "background": "#faf8ff",
+                    "surface-tint": "#3e59ad",
+                    "tertiary-fixed-dim": "#9dd82c",
+                    "surface-bright": "#faf8ff",
+                    "on-secondary-fixed": "#2c1600",
+                    "surface-container": "#eeedf5",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#643900",
+                    "citrus-green": "#84BD00",
+                    "on-background": "#1a1b21",
+                    "surface-container-high": "#e9e7ef",
+                    "on-surface-variant": "#444651",
+                    "secondary-fixed": "#ffdcbd",
+                    "on-primary-fixed-variant": "#234194",
+                    "inverse-surface": "#2f3036",
+                    "on-error-container": "#93000a",
+                    "surface": "#faf8ff",
+                    "outline-variant": "#c5c5d3",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "base": "8px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Hanken Grotesk"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700"}],
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface-container-low text-on-background font-body-md selection:bg-orange-burst/30 relative z-0">
+<div class="fixed inset-0 z-[-1] bg-[radial-gradient(circle_at_top_right,rgba(49,77,160,0.05),transparent_50%),radial-gradient(circle_at_bottom_left,rgba(243,146,0,0.05),transparent_50%)] pointer-events-none"></div>
+<!-- TopNavBar -->
+<style>
+@keyframes flag-wave {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-1.5px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+@keyframes flag-shine {
+  0% { opacity: 0.9; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8)); }
+  100% { opacity: 0.9; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
+}
+.flag-wave-anim {
+  animation: flag-wave 3s ease-in-out infinite;
+}
+.flag-shine-anim {
+  animation: flag-shine 2s infinite;
+}
+</style>
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-container-max rounded-full border border-pure-white/20 bg-pure-white/70 backdrop-blur-xl flex justify-between items-center px-8 py-4 z-50 shadow-xl shadow-cola-blue/10" id="TopNavBar">
+<div class="flex items-center gap-3">
+<img alt="Kinza Logo" class="h-10 w-auto hover:scale-105 transition-transform duration-300" src="images/img_1.png"/>
+<span class="font-display-lg text-display-lg-mobile md:text-display-lg font-extrabold text-primary tracking-tighter">Kinza</span>
+<div class="relative flex items-center flag-wave-anim ml-1">
+  <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-500/25 animate-ping"></span>
+  <span class="relative flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-emerald-800 text-[10px] text-pure-white font-bold px-2 py-0.5 rounded-full border border-emerald-400/20 shadow-md flag-shine-anim">
+    <svg class="h-3 w-auto rounded-sm" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="200" fill="#005A36" />
+      <rect width="75" height="200" fill="#FFFFFF" />
+      <circle cx="187.5" cy="100" r="60" fill="#FFFFFF" />
+      <circle cx="202.5" cy="85" r="60" fill="#005A36" />
+      <polygon points="187.5,75 192.5,90 207.5,90 195,100 200,115 187.5,105 175,115 180,100 167.5,90 182.5,90" fill="#FFFFFF" />
+    </svg>
+    PK
+  </span>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="index.html">Home</a>
+<a class="font-label-lg text-label-lg text-primary border-b-2 border-orange-burst font-bold pb-1 hover:scale-105 transition-all" href="about.html">About Us</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="products.html">Flavors</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="gallery.html">Gallery</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="contact.html">Contact</a>
+</div>
+<button onclick="window.location.href='gallery.html'" class="hidden md:block bg-primary text-pure-white px-6 py-2 rounded-full font-label-lg text-label-lg hover:scale-105 transition-all active:scale-95 shadow-md shadow-primary/20">
+            Where to Buy
+        </button>
+<!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors z-50">
+            <span class="material-symbols-outlined text-[28px] !leading-none" id="menu-icon" style="font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;">menu</span>
+        </button>
+</nav>
+<!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed top-24 left-1/2 -translate-x-1/2 w-[90%] bg-pure-white/95 dark:bg-black/95 backdrop-blur-2xl rounded-2xl border border-pure-white/20 p-6 z-40 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-4 md:hidden">
+            <div class="flex flex-col gap-3">
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="index.html">Home</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-primary font-bold border-l-4 border-orange-burst pl-3" href="about.html">About Us</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="products.html">Flavors</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="gallery.html">Gallery</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="contact.html">Contact</a>
+                <button onclick="window.location.href='gallery.html'" class="w-full bg-primary text-pure-white py-3 rounded-full font-label-lg mt-3 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                    Where to Buy
+                </button>
+            </div>
+        </div>
+<!-- Hero Section -->
+<header class="relative min-h-[819px] flex items-center justify-center pt-24 overflow-hidden">
+<div class="relative z-10 text-center max-w-4xl px-margin-mobile">
+<span class="inline-block bg-primary-container/10 text-primary px-4 py-1 rounded-full font-label-sm text-label-sm mb-6 tracking-widest uppercase">The Kinza Journey</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-deep-navy mb-6">From the Kingdom to the<br/><span class="text-orange-burst">Heart of Pakistan.</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Kinza is more than a beverage; it's a cross-cultural celebration of ambition, quality, and the refreshing spirit of a global community.</p>
+</div>
+<div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-full max-w-5xl h-64 blur-3xl opacity-20 bg-gradient-to-t from-cola-blue to-transparent"></div>
+</header>
+<!-- Origin Story: Legacy Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="relative group">
+<div class="absolute -inset-4 bg-gradient-to-tr from-cola-blue/10 to-orange-burst/10 rounded-[3rem] blur-2xl group-hover:opacity-100 transition-opacity"></div>
+<div class="relative glass-card rounded-[3rem] overflow-hidden p-4 chilled-shadow border-pure-white/40">
+<img class="w-full aspect-[4/5] object-cover rounded-[2.5rem]" data-alt="A high-end, premium interior shot of a modern corporate headquarters in Saudi Arabia. The space features sleek architectural lines, warm desert-inspired stone textures, and a large illuminated logo of Al Jameel International on a feature wall. The lighting is soft and golden, reflecting off polished marble floors, creating a sense of heritage and established prestige." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADHjek2kfBKnUk3yFyDss9UeqFftoscIMW8ujVXhYn_9yJxMSMxFIpvrRsxgaGikqaq_utFo_FCng22BhAbsBitqDKkb7CE5NwfXNZnk31KIKULBGU5Ea0Gaz1HRoV5x7TG7dnSwNO0uIkkycs03KeS4O69oGp1ky173n_AS3bxrh2w21ogGeFf4Vih03AQYcj1_fYU3EjGHHHRzhhVS_JlAF-4SfyKgynoovba-2SlTbP7Zkopd7H"/>
+</div>
+<div class="absolute -bottom-10 -right-10 w-48 h-48 bg-lemon-yellow/20 rounded-full blur-3xl"></div>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-deep-navy mb-8">From the Kingdom to the Heart of Pakistan</h2>
+<div class="space-y-6 text-on-surface-variant font-body-lg">
+<p>Established under the visionary leadership of <strong>Al Jameel International</strong>, Kinza was born in the heart of the Saudi Arabian Kingdom in 2022. Our journey began with a mission to create a locally-owned refreshment brand that rivals global standards.</p>
+<p>Today, that legacy of excellence has expanded beyond borders. By blending our premium heritage with the vibrant local culture of Pakistan, we are bringing a new era of refreshment to a whole new audience.</p>
+<div class="pt-6 grid grid-cols-2 gap-8">
+<div class="border-l-4 border-orange-burst pl-4">
+<div class="font-display-lg text-headline-lg text-primary">2022</div>
+<div class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Inception Year</div>
+</div>
+<div class="border-l-4 border-citrus-green pl-4">
+<div class="font-display-lg text-headline-lg text-primary">2024</div>
+<div class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Pakistan Launch</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Mission & Vision (Bento Grid) -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop relative">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-deep-navy">Guided by Global Excellence</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-4">Pioneering a refreshing future for our communities in the Kingdom and Pakistan.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Quality Card -->
+<div class="md:col-span-8 glass-card p-10 rounded-[2rem] chilled-shadow relative overflow-hidden group">
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl text-primary mb-6">verified</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Uncompromising Quality</h3>
+<p class="text-on-surface-variant max-w-lg">Every drop of Kinza passes through rigorous multi-stage filtration and quality checks. Our facilities use the latest European bottling technology to ensure consistent refreshment in every can, everywhere we operate.</p>
+</div>
+</div>
+<div class="absolute bottom-0 right-0 w-1/2 opacity-10 group-hover:scale-110 transition-transform duration-700">
+</div>
+</div>
+<!-- Local Pride -->
+<div class="md:col-span-4 bg-cola-blue p-10 rounded-[2rem] text-pure-white flex flex-col justify-center shadow-lg shadow-cola-blue/20">
+<span class="material-symbols-outlined text-4xl text-lemon-yellow mb-6">public</span>
+<h3 class="font-headline-md text-headline-md mb-4">Global Reach</h3>
+<p class="text-pure-white/80">Representing the spirit of regional craftsmanship on the global stage. We are proud to contribute to industrial growth across the Saudi Kingdom and Pakistan.</p>
+</div>
+<!-- Vision 2030 / Shared Vision -->
+<div class="md:col-span-12 glass-card p-12 rounded-[2rem] border-primary-container/20 flex flex-col md:flex-row items-center gap-12 chilled-shadow">
+<div class="flex-1">
+<h3 class="font-headline-lg text-headline-lg text-deep-navy mb-4">A Vision Beyond Borders</h3>
+<p class="text-on-surface-variant font-body-lg">Kinza aligns with strategic national frameworks by fostering local manufacturing, creating sustainable career paths for local talent, and promoting high-quality domestic products that reflect a modern, interconnected identity.</p>
+</div>
+<div class="w-full md:w-1/3 aspect-video bg-surface-container rounded-xl overflow-hidden shadow-inner flex items-center justify-center p-8">
+<img class="w-full h-full object-contain" data-alt="A futuristic, stylized 3D representation of Saudi Vision 2030 branding integrated with Kinza's refreshing aesthetic. The image features architectural icons of Saudi giga-projects like NEOM and The Line emerging from a pool of crystal clear, bubbling soda water with lime and orange slices. The colors are vibrant primary blue and orange burst, set against a high-key light-mode background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0LJ6GY9ceqp6UQvuG92JCgfREFdVxJ5EwxtRVjnkeMKmV0nbB6fWRHL23bhLaF0Hrc-MhqEJex6Ut83mVcZhXDYKmmpu_Y_ISaYvEi1jLmksi1hjeQNAdumCEM_ocHjpj3ZKp-qQOofAsTdHDVU1-Dit4JB-O2u9cph_H2-smSFbSuRuNcl8loicA1sj9Ii-uijzjCclxHSfPCPQUtlLNHBGpcHSnS-wIWa48aQDC7PQ3o_pnaCVx"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Growth Timeline -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop overflow-hidden relative">
+<div class="max-w-4xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-deep-navy text-center mb-20">Milestones of Refreshment</h2>
+<div class="relative">
+<!-- Timeline Vertical Line -->
+<div class="absolute left-1/2 -translate-x-1/2 w-1 h-full timeline-line opacity-30"></div>
+<!-- Event 1 -->
+<div class="relative mb-24 md:flex items-center justify-between group">
+<div class="md:w-[45%] text-right hidden md:block">
+<h4 class="font-headline-md text-headline-md text-primary">The Spark</h4>
+<p class="text-on-surface-variant">Kinza project initiated by Al Jameel International in Saudi Arabia.</p>
+</div>
+<div class="z-10 w-12 h-12 rounded-full bg-primary flex items-center justify-center text-pure-white shadow-xl shadow-cola-blue/20 mx-auto border-4 border-surface-container-low animate-float">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+</div>
+<div class="md:w-[45%] text-left mt-4 md:mt-0">
+<span class="font-display-lg text-headline-lg text-orange-burst block mb-2">Q1 2022</span>
+<div class="md:hidden">
+<h4 class="font-headline-md text-headline-md text-primary">The Spark</h4>
+<p class="text-on-surface-variant">Kinza project initiated by Al Jameel International.</p>
+</div>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="relative mb-24 md:flex items-center justify-between flex-row-reverse group">
+<div class="md:w-[45%] text-left hidden md:block">
+<h4 class="font-headline-md text-headline-md text-primary">Kingdom Expansion</h4>
+<p class="text-on-surface-variant">Kinza becomes available in all major regions of the Kingdom.</p>
+</div>
+<div class="z-10 w-12 h-12 rounded-full bg-orange-burst flex items-center justify-center text-pure-white shadow-xl shadow-orange-burst/20 mx-auto border-4 border-surface-container-low animate-float" style="animation-delay: -1s">
+<span class="material-symbols-outlined text-sm">map</span>
+</div>
+<div class="md:w-[45%] text-right mt-4 md:mt-0">
+<span class="font-display-lg text-headline-lg text-cola-blue block mb-2">2023</span>
+<div class="md:hidden">
+<h4 class="font-headline-md text-headline-md text-primary">Kingdom Expansion</h4>
+<p class="text-on-surface-variant">Kinza becomes available in all major regions of the Kingdom.</p>
+</div>
+</div>
+</div>
+<!-- Event 3: NEW Pakistan Milestone -->
+<div class="relative mb-24 md:flex items-center justify-between group">
+<div class="md:w-[45%] text-right hidden md:block">
+<h4 class="font-headline-md text-headline-md text-primary">Kinza Arrives in Pakistan</h4>
+<p class="text-on-surface-variant">Launching a new era of refreshment across Lahore, Karachi, and Islamabad.</p>
+</div>
+<div class="z-10 w-12 h-12 rounded-full bg-citrus-green flex items-center justify-center text-pure-white shadow-xl shadow-citrus-green/20 mx-auto border-4 border-surface-container-low animate-float" style="animation-delay: -2s">
+<span class="material-symbols-outlined text-sm">flight_takeoff</span>
+</div>
+<div class="md:w-[45%] text-left mt-4 md:mt-0">
+<span class="font-display-lg text-headline-lg text-orange-burst block mb-2">2024</span>
+<div class="md:hidden">
+<h4 class="font-headline-md text-headline-md text-primary">Kinza Arrives in Pakistan</h4>
+<p class="text-on-surface-variant">Launching a new era of refreshment across Lahore, Karachi, and Islamabad.</p>
+</div>
+</div>
+</div>
+<!-- Event 4 -->
+<div class="relative md:flex items-center justify-between flex-row-reverse group">
+<div class="md:w-[45%] text-left hidden md:block">
+<h4 class="font-headline-md text-headline-md text-primary">Flavor Innovation</h4>
+<p class="text-on-surface-variant">Launched new regional variants to record success across markets.</p>
+</div>
+<div class="z-10 w-12 h-12 rounded-full bg-lemon-yellow flex items-center justify-center text-primary shadow-xl shadow-lemon-yellow/20 mx-auto border-4 border-surface-container-low animate-float" style="animation-delay: -3s">
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<div class="md:w-[45%] text-right mt-4 md:mt-0">
+<span class="font-display-lg text-headline-lg text-cola-blue block mb-2">Present Day</span>
+<div class="md:hidden">
+<h4 class="font-headline-md text-headline-md text-primary">Flavor Innovation</h4>
+<p class="text-on-surface-variant">Launched new regional variants to record success.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Production & Lifestyle (Gallery) -->
+<section class="py-24 bg-deep-navy text-pure-white overflow-hidden shadow-inner">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg">Shared Moments of Refreshment</h2>
+<p class="text-surface-variant/80 mt-2">From our high-tech labs to your favorite celebrations.</p>
+</div>
+<button onclick="window.location.href='gallery.html'" class="flex items-center gap-2 group text-lemon-yellow font-label-lg text-label-lg">
+                    View Gallery <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="relative group rounded-3xl overflow-hidden aspect-square chilled-shadow">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A clean, clinical, and futuristic shot of a high-speed beverage bottling line. Thousands of metallic blue Kinza cans are moving in a perfect curve through a stainless steel conveyor system. The lighting is bright and cool, reflecting off the condensation-like surfaces and polished chrome equipment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCab57H1J1Yyr6ugV20r2ZL5m6Fsa_YkofqzmhZZBxVQBo-G1xC4vd-OziUhr4cnxy6OcK3r_a6TJJUwgMY319ObdBxzWzDXFPkI7wk9v7pKHXtxN87fB8aHxjEFFz4FA5Om9GBSd5CB47S3kstmsuNuR1L4hLPpNlwsv44laJI8vSKJcX-ZalB-eADw2aTJa9rZ7JbrbURBZ0mVo4m0wOMUNawRhfo1yMzgKwgRSmTwwLDsNVikXgv"/>
+<div class="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6">
+<p class="font-label-lg text-label-lg text-lemon-yellow">Advanced Bottling</p>
+</div>
+</div>
+<!-- Visual Update: Rooftop Lifestyle Shot -->
+<div class="relative group rounded-3xl overflow-hidden aspect-square chilled-shadow md:mt-12">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A premium lifestyle image of a group of young Pakistani friends laughing and sharing Kinza drinks at a rooftop dinner in Karachi with the city lights in the background. Modern Pakistani fashion, warm atmosphere, high-end commercial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfgdQmioncB1Ue7idyctzKuUsALFKJzUzYSgfXjoFPtpKi4PfPC1ytrAcAxhsNW8i5U0cYzm1xLEmbRMhghTb_amzoXsbEvxJPcEdY-vQ9Bpax8YvfnJ56JJN1b4_-jF9YiMC-T3wDDaWaNPDSQmicJZ-exUkS-OcKF_yPuDL-4y24x7mII6PxbUiqj0aIK1DFIZJALoJ4FKXSUTWSSfFef2qT_lNVoMwGnOI-O1EVmaHX-wcTrsjD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6">
+<p class="font-label-lg text-label-lg text-lemon-yellow">Local Culture</p>
+</div>
+</div>
+<div class="relative group rounded-3xl overflow-hidden aspect-square chilled-shadow">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A wide angle shot of a massive, modern logistics and distribution warehouse at night. Neatly stacked pallets of Kinza beverage cases are organized in towering racks. A modern delivery truck is visible at a loading dock in the background. The lighting is dramatic, with cool blue neon accents and warm safety lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh--0yDbJm36vKEomrN3p5aNn6PO-HPe5eY_bTdBsxn6HME4LUho1UmRidd0hv1KcmWdjY0IpXsxwWKFOa7VOETKSLtmWECt1FIfB2FpPcIyhyejqRctIzeyyN0Kjq_wI_MeKaKuSc0C0uPAfx2qo8V3TyuN0xVGFDeawnvYzRI6hM3gov_bXoWu8T5ApF39UQwk5obihpgP9_9xdv1CCfRw6aSczJmOopHOfCxul16V4fuUQ5iVPa"/>
+<div class="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6">
+<p class="font-label-lg text-label-lg text-lemon-yellow">Distribution Hub</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Team / Talent Highlight -->
+<section class="container mx-auto px-margin-mobile md:px-margin-desktop py-24 relative">
+<div class="glass-card rounded-[3rem] p-12 md:p-20 flex flex-col md:flex-row items-center gap-16 border-cola-blue/10 chilled-shadow">
+<div class="w-full md:w-1/2">
+<h2 class="font-headline-lg text-headline-lg text-deep-navy mb-6">A Shared Spirit</h2>
+<p class="text-on-surface-variant font-body-lg mb-8">At Kinza, our greatest ingredient is the talent and diversity of our people across borders. From our master blenders to our logistics experts, we are a global team united by a common goal: delivering excellence to every home.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-4 rounded-2xl bg-primary/5">
+<span class="material-symbols-outlined text-primary">diversity_3</span>
+<span class="font-label-lg text-label-lg">Multicultural Workforce</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-2xl bg-orange-burst/5">
+<span class="material-symbols-outlined text-orange-burst">psychology</span>
+<span class="font-label-lg text-label-lg">Expert Innovation Team</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 grid grid-cols-2 gap-4">
+<img class="w-full aspect-square object-cover rounded-2xl shadow-lg" data-alt="A professional portrait of a diverse team of employees working together in a modern, glass-walled office environment in Riyadh. They are dressed in business casual attire and traditional Saudi dress, looking optimistic and collaborative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA39nheHoPkrmuZ4lRFM-tDeotXJvxKiI8WwE4yEYvrMT31ZgBsuCN0xJbVmJIiwxStA-bxz8a2Fp6s_kgV9DF1HGEUHi1Iw1wVCUWIQ_Nf7EVt8NJKc5bq1gA0xZii2J-FD6N9dMaG8Km2qlqBAR7_z_m27kX-X8iaj6yiTvA9617mVqQazPfmOFJWanTxez3LFt1qBANfnjscQNP3ZanOoFrg8GsuaI38830V4dM_PwxdBEEfS_XA"/>
+<img class="w-full aspect-square object-cover rounded-2xl mt-8 shadow-lg" data-alt="A smiling Saudi female food scientist in a modern industrial test kitchen, holding a Kinza citrus can while explaining flavor profiles to a group of colleagues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB0UbTfDiK-7TcQ5SsDMrEAcNX163ARzPb2no-t0N0cWykvQ7IUbbdVQBtekAX0S9xB2PYXZZuTmjDHaAH8IlpVl9Snh92qaP4JA4a7VVHncjFYzvnpjrUyfss-W-x13z6IAzgVlDBt-6vTPDYg047qUbuc14dSyrEGFM7QqEZD4DS6i3S-I5MU6MqUW1-KjB5hO2lgc1xdiDwMnUuxIEqnr2XeqYxgpxU0so1LqFCPeFQsnTiZ9CF"/>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full rounded-t-[3rem] mt-20 bg-deep-navy text-pure-white shadow-[0_-10px_40px_rgba(16,58,98,0.2)]">
+<div class="container mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter py-16">
+<div class="space-y-6">
+<div class="flex items-center gap-2">
+<img alt="Kinza Logo" class="h-12 w-auto brightness-0 invert opacity-100" src="images/img_1.png"/>
+<span class="font-headline-lg text-headline-lg text-orange-burst">Kinza</span>
+</div>
+<p class="text-surface-variant/80 font-body-md text-body-md">Refreshing the Kingdom and Pakistan with every sip. Crafted with local pride for a modern world.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-pure-white/10 flex items-center justify-center hover:bg-orange-burst transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-pure-white/10 flex items-center justify-center hover:bg-orange-burst transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg mb-6 uppercase tracking-widest text-lemon-yellow">Menu</h4>
+<ul class="space-y-4 font-body-md text-body-md">
+<li><a class="text-surface-variant/80 hover:text-pure-white transition-all" href="index.html">Home</a></li>
+<li><a class="text-lemon-yellow" href="about.html">About Us</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white transition-all" href="products.html">Flavors</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white transition-all" href="gallery.html">Store Locator</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg mb-6 uppercase tracking-widest text-lemon-yellow">Quick Links</h4>
+<ul class="space-y-4 font-body-md text-body-md">
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform" href="#">Privacy Policy</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform" href="#">Terms of Service</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform" href="#">FAQ</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform" href="#">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg mb-6 uppercase tracking-widest text-lemon-yellow">Newsletter</h4>
+<p class="text-surface-variant/80 mb-4 text-body-md">Stay updated with our latest news and flavors.</p>
+<div class="flex">
+<input class="bg-pure-white/10 border-none rounded-l-xl px-4 py-3 focus:ring-2 focus:ring-orange-burst w-full text-pure-white" placeholder="Email address" type="email"/>
+<button class="bg-orange-burst text-deep-navy px-4 rounded-r-xl font-bold hover:bg-lemon-yellow transition-colors">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="border-t border-pure-white/10 px-margin-mobile md:px-margin-desktop py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-surface-variant/60 text-body-md">© 2024 Kinza Beverages. Refreshing Nations.</p>
+<div class="flex gap-8 text-surface-variant/60">
+<span class="material-symbols-outlined text-lemon-yellow">verified</span>
+<span>Member of Al Jameel International Group</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple parallax effect for hero elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroText = document.querySelector('header h1');
+            if (heroText) {
+                heroText.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+
+        // Add intersection observer for reveal animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div').forEach(el => {
+            el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+<!-- Mobile Menu Script -->
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isClosed = mobileMenu.classList.contains('opacity-0');
+                    if (isClosed) {
+                        // Open Menu
+                        mobileMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-4');
+                        mobileMenu.classList.add('opacity-100', 'translate-y-0');
+                        if (menuIcon) {
+                            menuIcon.textContent = 'close';
+                            menuIcon.style.color = '#F39200'; // accent highlight on open
+                        }
+                    } else {
+                        // Close Menu
+                        closeMenu();
+                    }
+                });
+
+                // Helper to close menu
+                const closeMenu = () => {
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+                    mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+                    if (menuIcon) {
+                        menuIcon.textContent = 'menu';
+                        menuIcon.style.color = '';
+                    }
+                };
+
+                // Close menu if clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        closeMenu();
+                    }
+                });
+
+                // Close menu on window resize if crossing md breakpoint
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 768) {
+                        closeMenu();
+                    }
+                });
+            }
+        });
+        </script>
+</body></html>

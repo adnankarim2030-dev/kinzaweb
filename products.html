@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flavors | Kinza Beverages</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .flavor-card-hover:hover .flavor-image {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#dad9e1",
+                      "inverse-primary": "#b5c4ff",
+                      "deep-navy": "#103A62",
+                      "cola-blue": "#314DA0",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed-variant": "#693c00",
+                      "secondary-fixed-dim": "#ffb86e",
+                      "on-tertiary-fixed": "#131f00",
+                      "surface-variant": "#e3e1e9",
+                      "on-primary-container": "#b5c4ff",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#2c4200",
+                      "pure-white": "#FFFFFF",
+                      "surface-container-low": "#f4f3fa",
+                      "primary-fixed-dim": "#b5c4ff",
+                      "primary-container": "#314da0",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#3e5b00",
+                      "on-primary-fixed": "#00164e",
+                      "orange-burst": "#F39200",
+                      "frost-gray": "#F9FAFB",
+                      "outline": "#757683",
+                      "on-tertiary-container": "#9dd82c",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "lemon-yellow": "#FFD100",
+                      "primary": "#143588",
+                      "on-surface": "#1a1b21",
+                      "tertiary-fixed": "#b8f649",
+                      "on-tertiary-fixed-variant": "#354e00",
+                      "secondary-container": "#fc9910",
+                      "surface-container-highest": "#e3e1e9",
+                      "inverse-on-surface": "#f1f0f8",
+                      "primary-fixed": "#dce1ff",
+                      "secondary": "#8a5100",
+                      "background": "#faf8ff",
+                      "surface-tint": "#3e59ad",
+                      "tertiary-fixed-dim": "#9dd82c",
+                      "surface-bright": "#faf8ff",
+                      "on-secondary-fixed": "#2c1600",
+                      "surface-container": "#eeedf5",
+                      "on-error": "#ffffff",
+                      "on-secondary-container": "#643900",
+                      "citrus-green": "#84BD00",
+                      "on-background": "#1a1b21",
+                      "surface-container-high": "#e9e7ef",
+                      "on-surface-variant": "#444651",
+                      "secondary-fixed": "#ffdcbd",
+                      "on-primary-fixed-variant": "#234194",
+                      "inverse-surface": "#2f3036",
+                      "on-error-container": "#93000a",
+                      "surface": "#faf8ff",
+                      "outline-variant": "#c5c5d3",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "container-max": "1280px",
+                      "base": "8px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"],
+                      "label-sm": ["Hanken Grotesk"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "display-lg-mobile": ["Plus Jakarta Sans"],
+                      "body-lg": ["Plus Jakarta Sans"],
+                      "label-lg": ["Hanken Grotesk"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700"}],
+                      "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface-container-low text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<style>
+@keyframes flag-wave {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-1.5px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+@keyframes flag-shine {
+  0% { opacity: 0.9; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8)); }
+  100% { opacity: 0.9; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
+}
+.flag-wave-anim {
+  animation: flag-wave 3s ease-in-out infinite;
+}
+.flag-shine-anim {
+  animation: flag-shine 2s infinite;
+}
+</style>
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-container-max rounded-full border border-pure-white/20 bg-pure-white/70 backdrop-blur-xl flex justify-between items-center px-8 py-4 z-50 shadow-xl shadow-cola-blue/10" id="TopNavBar">
+<div class="flex items-center gap-3">
+<img alt="Kinza Logo" class="h-10 w-auto hover:scale-105 transition-transform duration-300" src="images/img_1.png"/>
+<span class="font-display-lg text-display-lg-mobile md:text-display-lg font-extrabold text-primary tracking-tighter">Kinza</span>
+<div class="relative flex items-center flag-wave-anim ml-1">
+  <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-500/25 animate-ping"></span>
+  <span class="relative flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-emerald-800 text-[10px] text-pure-white font-bold px-2 py-0.5 rounded-full border border-emerald-400/20 shadow-md flag-shine-anim">
+    <svg class="h-3 w-auto rounded-sm" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="200" fill="#005A36" />
+      <rect width="75" height="200" fill="#FFFFFF" />
+      <circle cx="187.5" cy="100" r="60" fill="#FFFFFF" />
+      <circle cx="202.5" cy="85" r="60" fill="#005A36" />
+      <polygon points="187.5,75 192.5,90 207.5,90 195,100 200,115 187.5,105 175,115 180,100 167.5,90 182.5,90" fill="#FFFFFF" />
+    </svg>
+    PK
+  </span>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="index.html">Home</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="about.html">About Us</a>
+<a class="font-label-lg text-label-lg text-primary border-b-2 border-orange-burst font-bold pb-1 hover:scale-105 transition-all" href="products.html">Flavors</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="gallery.html">Gallery</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="contact.html">Contact</a>
+</div>
+<button onclick="window.location.href='gallery.html'" class="hidden md:block bg-primary text-pure-white px-6 py-2 rounded-full font-label-lg text-label-lg hover:scale-105 transition-all active:scale-95 shadow-md shadow-primary/20">
+            Where to Buy
+        </button>
+<!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors z-50">
+            <span class="material-symbols-outlined text-[28px] !leading-none" id="menu-icon" style="font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;">menu</span>
+        </button>
+</nav>
+<!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed top-24 left-1/2 -translate-x-1/2 w-[90%] bg-pure-white/95 dark:bg-black/95 backdrop-blur-2xl rounded-2xl border border-pure-white/20 p-6 z-40 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-4 md:hidden">
+            <div class="flex flex-col gap-3">
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="index.html">Home</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="about.html">About Us</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-primary font-bold border-l-4 border-orange-burst pl-3" href="products.html">Flavors</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="gallery.html">Gallery</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="contact.html">Contact</a>
+                <button onclick="window.location.href='gallery.html'" class="w-full bg-primary text-pure-white py-3 rounded-full font-label-lg mt-3 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                    Where to Buy
+                </button>
+            </div>
+        </div>
+<main class="relative pt-28 pb-20">
+<!-- Video Showcase Section -->
+<section class="container mx-auto px-margin-mobile md:px-margin-desktop pb-8 relative z-10">
+    <div class="relative w-full aspect-video rounded-3xl overflow-hidden border border-pure-white/20 shadow-2xl shadow-cola-blue/10">
+        <video id="header-promo-video" src="images/Flavors%20page%20video.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+        <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent pointer-events-none"></div>
+    </div>
+</section>
+
+<!-- Hero Section Background -->
+<div class="absolute inset-0 -z-10 overflow-hidden">
+<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-cola-blue/5 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-orange-burst/5 blur-[120px]"></div>
+</div>
+<!-- Header -->
+<header class="px-margin-mobile md:px-margin-desktop mb-8 text-center max-w-4xl mx-auto">
+<span class="inline-block px-4 py-1.5 rounded-full bg-primary-container/10 text-primary font-label-lg text-label-lg mb-4 tracking-widest uppercase">The Kinza Collection</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-6">Bursting with Local Spirit</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Discover the unique lineup of Kinza. From the deep punch of our original Cola to the zesty sparkle of citrus, every drop is crafted for your refreshment.</p>
+</header>
+<!-- Product Grid -->
+<section class="container mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Cola Card -->
+<div id="cola" class="scroll-mt-32 group flavor-card-hover relative bg-surface-container-lowest shadow-xl shadow-outline-variant/10 border border-outline-variant/20 reveal-card rounded-[2.5rem] p-8 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-cola-blue/20 border-t-4 border-t-cola-blue">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-cola-blue mb-1">Cola</h2>
+<p class="font-label-sm text-label-sm text-outline tracking-wider">ORIGINAL REFRESHMENT</p>
+</div>
+<span class="material-symbols-outlined text-cola-blue opacity-20 text-5xl" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<div class="relative h-64 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-cola-blue/5 rounded-full scale-75 blur-2xl group-hover:scale-100 transition-transform duration-700"></div>
+<img alt="Kinza Cola" class="flavor-image h-full w-auto object-contain z-10 animate-float transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLvwR7kgNSFGJpEKnSZwRGDIYPBZbS2cw6S9y3A948dHOE0SJpW9nLx5AeHMR4IiE-rWv83KUXOr4RH9mgMOVDEQmOim_Zje89ykNcZKLEoQDeMgj751o9VruPcZg9HN_M3-R7SxfpaQtw9tVdoz5FZzUnciw4JNbbZHCIrkD4FaTPpE9vHNQgNtCL9pRXcAf6USiHLAuEGw374slWWG55Vrp5HTVrZLgA_jjVJW4Eu4Eu83879MCBAqmQ"/>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-cola-blue/5">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Natural</p>
+<p class="font-label-lg text-cola-blue">Flavorings</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-cola-blue/5">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Carbonation</p>
+<p class="font-label-lg text-cola-blue">Sparkling High</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-cola-blue/10">
+<span class="font-label-lg text-on-surface-variant">Available in:</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg" title="Can">liquor</span>
+<span class="material-symbols-outlined text-outline text-lg" title="Bottle">vaccines</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Citrus Card -->
+<div id="citrus" class="scroll-mt-32 group flavor-card-hover relative bg-surface-container-lowest shadow-xl shadow-outline-variant/10 border border-outline-variant/20 reveal-card rounded-[2.5rem] p-8 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-citrus-green/20 border-t-4 border-t-citrus-green">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-citrus-green mb-1">Citrus</h2>
+<p class="font-label-sm text-label-sm text-outline tracking-wider">ZESTY VITALITY</p>
+</div>
+<span class="material-symbols-outlined text-citrus-green opacity-20 text-5xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="relative h-64 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-citrus-green/5 rounded-full scale-75 blur-2xl group-hover:scale-100 transition-transform duration-700"></div>
+<img alt="Kinza Citrus" class="flavor-image h-full w-auto object-contain z-10 animate-float transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLtX2vTmGLOVBhB8R0vlr71ymcGUhZpkKynzih0AhHdqRSSe8xBfX51GfPoVtN-76KaYfHkDPwu37w4W63GxKOVdOtPwWcI2pH0pfNxJPS1Q1KRYLq7K5XSjlrQ-3MbGBaMgqs7mSOqZo4IcSviT5pMCvMvYzaQs3ZHTEqeveBa8B92DUw86JV1HBTJsF_fVBp728dOCYJof7NXxcgRn9w8oUuTUT0aMeTFsldGV-ua_KeMAcUf_gmMeCJk"/>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-citrus-green/5">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Caffeine</p>
+<p class="font-label-lg text-citrus-green">None</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-citrus-green/5">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Extract</p>
+<p class="font-label-lg text-citrus-green">Lime &amp; Lemon</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-citrus-green/10">
+<span class="font-label-lg text-on-surface-variant">Available in:</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg">liquor</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Orange Card -->
+<div id="orange" class="scroll-mt-32 group flavor-card-hover relative bg-surface-container-lowest shadow-xl shadow-outline-variant/10 border border-outline-variant/20 reveal-card rounded-[2.5rem] p-8 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-orange-burst/20 border-t-4 border-t-orange-burst">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-orange-burst mb-1">Orange</h2>
+<p class="font-label-sm text-label-sm text-outline tracking-wider">SUN-KISSED SWEETNESS</p>
+</div>
+<span class="material-symbols-outlined text-orange-burst opacity-20 text-5xl" style="font-variation-settings: 'FILL' 1;">wb_sunny</span>
+</div>
+<div class="relative h-64 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-orange-burst/5 rounded-full scale-75 blur-2xl group-hover:scale-100 transition-transform duration-700"></div>
+<img alt="Kinza Orange" class="flavor-image h-full w-auto object-contain z-10 animate-float transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLuvkuADhfRE1LtGVzNojf48jh2SrnRPb0Q196o9ya6IArkOfwl-zSn14qyyouTvSRIHkcz1W8pO7ByKsUtilAh0IvRGg0uTLLSyjmEesYvx-UIS-U4Fx1fvvW3uTai1ftS2lmBZBqJm7smtKasW921nwQ059a3UUXj91MLbCP3F6K1QVDrjEWC2ZpNVk9zr_SIklMgI_cX-KVIjc4gAZjSJuinnFiE43wOc7qisOI_b-XnCBqOyFfp1Dg"/>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-orange-burst/5">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Fruit Juice</p>
+<p class="font-label-lg text-orange-burst">Added Extract</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-orange-burst/5">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Finish</p>
+<p class="font-label-lg text-orange-burst">Smooth Tang</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-orange-burst/10">
+<span class="font-label-lg text-on-surface-variant">Available in:</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg">liquor</span>
+<span class="material-symbols-outlined text-outline text-lg">inventory_2</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Lemon Card -->
+<div id="lemon" class="scroll-mt-32 group flavor-card-hover relative bg-surface-container-lowest shadow-xl shadow-outline-variant/10 border border-outline-variant/20 reveal-card rounded-[2.5rem] p-8 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-lemon-yellow/20 border-t-4 border-t-lemon-yellow">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-deep-navy mb-1">Lemon</h2>
+<p class="font-label-sm text-label-sm text-outline tracking-wider">CRISP &amp; CLEAN</p>
+</div>
+<span class="material-symbols-outlined text-lemon-yellow opacity-40 text-5xl" style="font-variation-settings: 'FILL' 1;">brightness_high</span>
+</div>
+<div class="relative h-64 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-lemon-yellow/10 rounded-full scale-75 blur-2xl group-hover:scale-100 transition-transform duration-700"></div>
+<img alt="Kinza Lemon" class="flavor-image h-full w-auto object-contain z-10 animate-float transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLv-TvYkNhQzZfbTzoRE6F2UgVZtuShkPgL6MmpAUlwgl9gWZuu2mUSkrKLgpf_XAJjy749rFz-ppUj4_mbQS7F-QsNl84xBW7cWL3CelGkryagG3brLwk8NtHT85iEtXhubEN7dtqOX0aJwDON5XIW-BYjwWj52cuE1PqXJA5YFgdEXuIL4QmMws0Y8rcpPq5gEaj-OaH21lLEx4SjYg4nRpW6lBhMu2fKMCn_bRrlWzQsKNM5w_ZodMo0"/>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-lemon-yellow/10">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Sweetener</p>
+<p class="font-label-lg text-deep-navy">Pure Cane</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-lemon-yellow/10">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Profile</p>
+<p class="font-label-lg text-deep-navy">Ultra Clear</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-lemon-yellow/20">
+<span class="font-label-lg text-on-surface-variant">Available in:</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg">liquor</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Diet Cola Card -->
+<div class="group flavor-card-hover relative bg-surface-container-lowest shadow-xl shadow-outline-variant/10 border border-outline-variant/20 reveal-card rounded-[2.5rem] p-8 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-outline/20 border-t-4 border-t-outline">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-1">Diet Cola</h2>
+<p class="font-label-sm text-label-sm text-outline tracking-wider">ZERO GUILT</p>
+</div>
+<span class="material-symbols-outlined text-outline opacity-20 text-5xl" style="font-variation-settings: 'FILL' 1;">nest_eco_leaf</span>
+</div>
+<div class="relative h-64 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-outline/5 rounded-full scale-75 blur-2xl group-hover:scale-100 transition-transform duration-700"></div>
+<img alt="Kinza Diet Cola" class="flavor-image h-full w-auto object-contain z-10 animate-float transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLs0q34zp1lKGfWPpqF7QE2a66gPeweW2ZKxZqnINb9g3NnNI7nQdxTJ9pC4OQ0Vju_X-C8r2_l9vYap_pb02DLavJKIbomSj2e4E87qqW2k5XWcFVuAl0IE1DoiiVF591Wmw9GZYJaxT0mZtb_Pp5PLZiX1HfLvXgFATCGV5iDL1jGi8DlThZSb9T04OW7Fz0ltca6KX1Tq_LAyKEY-QH3XfBiBmQitmKzAjoLxzaMA-IGyUuD3ju1u_Yk"/>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-outline/5">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Calories</p>
+<p class="font-label-lg text-on-surface">Zero</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-outline/5">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Sugar</p>
+<p class="font-label-lg text-on-surface">None</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline/10">
+<span class="font-label-lg text-on-surface-variant">Available in:</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg">liquor</span>
+<span class="material-symbols-outlined text-outline text-lg">vaccines</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Blackcurrant Card -->
+<div class="group flavor-card-hover relative bg-surface-container-lowest shadow-xl shadow-outline-variant/10 border border-outline-variant/20 reveal-card rounded-[2.5rem] p-8 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#6a2b86]/20 border-t-4 border-t-[#6a2b86]">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-[#6a2b86] mb-1">Blackcurrant</h2>
+<p class="font-label-sm text-label-sm text-outline tracking-wider">DEEP FRUIT PUNCH</p>
+</div>
+<span class="material-symbols-outlined text-[#6a2b86] opacity-20 text-5xl" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+</div>
+<div class="relative h-64 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-[#6a2b86]/5 rounded-full scale-75 blur-2xl group-hover:scale-100 transition-transform duration-700"></div>
+<img alt="Kinza Blackcurrant" class="flavor-image h-full w-auto object-contain z-10 animate-float transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLvUjqouRJVW4T9oaTdKL5o1rPXMfNzMerZqOAGrftdYoaGRXl7deBoEreTu6DoDlEoAPqaH35WRc7oDKSz_0C4mXKhf4nbd5_tAVuyLx9REGzHCfjK-KAagfVl6ZK7yd-40RR6cOMRKe_A4wQiNAlABokags-zFAYV8x7OFjFwFXYQ7goWbrLFrsvB1s6WscdSM4NbpFvHBP4F7_9TvXPrvmj8wUmVGb0zaGuLXpw50d7HHLvSPJliM9A"/>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-[#6a2b86]/10">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Flavor</p>
+<p class="font-label-lg text-[#6a2b86]">Rich Berry</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-[#6a2b86]/10">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Style</p>
+<p class="font-label-lg text-[#6a2b86]">Bold &amp; Sweet</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-[#6a2b86]/20">
+<span class="font-label-lg text-on-surface-variant">Available in:</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg">liquor</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pomegranate Card -->
+<div class="group flavor-card-hover relative bg-surface-container-lowest shadow-xl shadow-outline-variant/10 border border-outline-variant/20 reveal-card rounded-[2.5rem] p-8 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#c61e4b]/20 border-t-4 border-t-[#c61e4b]">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-[#c61e4b] mb-1">Pomegranate</h2>
+<p class="font-label-sm text-label-sm text-outline tracking-wider">RICH &amp; TART</p>
+</div>
+<span class="material-symbols-outlined text-[#c61e4b] opacity-20 text-5xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+</div>
+<div class="relative h-64 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-[#c61e4b]/5 rounded-full scale-75 blur-2xl group-hover:scale-100 transition-transform duration-700"></div>
+<img alt="Kinza Pomegranate" class="flavor-image h-full w-auto object-contain z-10 animate-float transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLs-MsUwwI_oQRQoCaQrJAthoqCTx0J3k69ak8NOhB0g1SOyh_fdoV6iQUB67kzeAc2Jty63_obopHyptf3sjQED1e95huYhv57o247x8KYnW5df6dXHyUPAVzg-nRpDWy0FzTeDXps5gNN_8VsYnNiIJbzQPB0LR6jxPKyHGQWM4YfUlpUwcawFT4olBNKHEt-plzh8Xy5C60UDy--4v-QCY5GPzr7T34aNfpQqZp6ea2pVKhwClzVZPcs"/>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-[#c61e4b]/10">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Note</p>
+<p class="font-label-lg text-[#c61e4b]">Crisp Tartness</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-[#c61e4b]/10">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Finish</p>
+<p class="font-label-lg text-[#c61e4b]">Refreshing</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-[#c61e4b]/20">
+<span class="font-label-lg text-on-surface-variant">Available in:</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg">liquor</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Soda Water Card -->
+<div class="group flavor-card-hover relative bg-surface-container-lowest shadow-xl shadow-outline-variant/10 border border-outline-variant/20 reveal-card rounded-[2.5rem] p-8 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#3babc1]/20 border-t-4 border-t-[#3babc1]">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-[#3babc1] mb-1">Soda Water</h2>
+<p class="font-label-sm text-label-sm text-outline tracking-wider">PURE SPARKLE</p>
+</div>
+<span class="material-symbols-outlined text-[#3babc1] opacity-20 text-5xl" style="font-variation-settings: 'FILL' 1;">bubble_chart</span>
+</div>
+<div class="relative h-64 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-[#3babc1]/5 rounded-full scale-75 blur-2xl group-hover:scale-100 transition-transform duration-700"></div>
+<img alt="Kinza Soda Water" class="flavor-image h-full w-auto object-contain z-10 animate-float transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLtUOEpAmZGQgvSY2uL94-WFOeRMnLvlCe4sqVEZhsTiBPPZ4lqWlqhw0D660DaVUr6rkzBMag3ThbqjVMtulrl6uzd-n9SIFh9dctNuALHWvVugpqCv7_nE3gCVlSTjS5LTXRWJ0vhfB2MWQBeGNlheV_0bm5cE-FIFVRWBX4BLhq-XWo9sAd4E0GgnTFgynodxp2ZMukYyAft22tm_ZZgj6Y-9o52VtWf9pupr_x3ILfGaZqGPiLMUrA"/>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-[#3babc1]/10">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Mixer</p>
+<p class="font-label-lg text-[#3babc1]">Perfect Base</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-3 rounded-2xl border border-[#3babc1]/10">
+<p class="text-[10px] text-outline uppercase font-bold mb-1">Bubbles</p>
+<p class="font-label-lg text-[#3babc1]">Fine &amp; Crisp</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-[#3babc1]/20">
+<span class="font-label-lg text-on-surface-variant">Available in:</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg">liquor</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Card / Gallery Link -->
+<div class="group relative bg-deep-navy rounded-[2.5rem] p-8 overflow-hidden transition-all duration-500 hover:scale-[1.02] reveal-card shadow-xl shadow-deep-navy/20">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_120%,#314DA0,transparent)]"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-lemon-yellow mb-4">Pack Your Refreshment</h2>
+<p class="font-body-md text-body-md text-pure-white/70">From a single chilled can to family-sized multipacks, Kinza fits every moment.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 text-pure-white/90">
+<span class="material-symbols-outlined text-lemon-yellow">done_all</span>
+<span class="font-label-lg text-label-lg">330ml Aluminum Cans</span>
+</div>
+<div class="flex items-center gap-3 text-pure-white/90">
+<span class="material-symbols-outlined text-lemon-yellow">done_all</span>
+<span class="font-label-lg text-label-lg">250ml &amp; 500ml PET Bottles</span>
+</div>
+<div class="flex items-center gap-3 text-pure-white/90">
+<span class="material-symbols-outlined text-lemon-yellow">done_all</span>
+<span class="font-label-lg text-label-lg">6-Pack &amp; 24-Pack Cases</span>
+</div>
+<div class="pt-6 flex flex-col gap-3">
+<a class="flex items-center justify-between bg-pure-white text-deep-navy px-6 py-4 rounded-2xl font-bold transition-all hover:bg-lemon-yellow" href="#">
+                                View Gallery
+                                <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between border border-pure-white/20 text-pure-white px-6 py-4 rounded-2xl font-bold transition-all hover:bg-pure-white/10" href="#">
+                                Find a Store
+                                <span class="material-symbols-outlined">location_on</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[3rem] mt-20 bg-deep-navy text-pure-white shadow-[0_-10px_40px_rgba(16,58,98,0.2)]">
+<div class="container mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter py-16">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<img alt="Kinza Logo" class="h-12 w-auto brightness-0 invert opacity-100" src="images/img_1.png"/>
+<span class="font-headline-lg text-headline-lg text-orange-burst">Kinza</span>
+</div>
+<p class="text-surface-variant/80 font-body-md text-body-md">
+                    Refreshing the Kingdom with quality beverages inspired by our roots and driven by our future.
+                </p>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-pure-white mb-6">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="index.html">Home</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="about.html">About Us</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="products.html">Flavors</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="gallery.html">Store Locator</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-pure-white mb-6">Connect</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-pure-white/20 flex items-center justify-center hover:bg-orange-burst hover:border-orange-burst transition-all" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-pure-white/20 flex items-center justify-center hover:bg-orange-burst hover:border-orange-burst transition-all" href="#">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-pure-white/20 flex items-center justify-center hover:bg-orange-burst hover:border-orange-burst transition-all" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-pure-white mb-6">Newsletter</h4>
+<div class="relative">
+<input class="w-full bg-pure-white/5 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-orange-burst text-pure-white placeholder:text-pure-white/30" placeholder="Your email" type="email"/>
+<button class="absolute right-2 top-1.5 bg-orange-burst text-pure-white p-1.5 rounded-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="border-t border-pure-white/10 py-8 px-margin-mobile md:px-margin-desktop text-center">
+<p class="text-surface-variant/60 font-body-md text-body-md">© 2024 Kinza Beverages. Refreshing the Kingdom.</p>
+</div>
+</footer>
+<script>
+        // Smooth reveal on scroll logic
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
+            observer.observe(card);
+        });
+
+        // Slow down header promo video
+        const promoVideo = document.getElementById('header-promo-video');
+        if (promoVideo) {
+            promoVideo.playbackRate = 0.6;
+        }
+    </script>
+<!-- Mobile Menu Script -->
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isClosed = mobileMenu.classList.contains('opacity-0');
+                    if (isClosed) {
+                        // Open Menu
+                        mobileMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-4');
+                        mobileMenu.classList.add('opacity-100', 'translate-y-0');
+                        if (menuIcon) {
+                            menuIcon.textContent = 'close';
+                            menuIcon.style.color = '#F39200'; // accent highlight on open
+                        }
+                    } else {
+                        // Close Menu
+                        closeMenu();
+                    }
+                });
+
+                // Helper to close menu
+                const closeMenu = () => {
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+                    mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+                    if (menuIcon) {
+                        menuIcon.textContent = 'menu';
+                        menuIcon.style.color = '';
+                    }
+                };
+
+                // Close menu if clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        closeMenu();
+                    }
+                });
+
+                // Close menu on window resize if crossing md breakpoint
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 768) {
+                        closeMenu();
+                    }
+                });
+            }
+        });
+        </script>
+</body></html>

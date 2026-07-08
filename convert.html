@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinza | Image to Video Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --accent: #00f2fe;
+            --text: #ffffff;
+            --muted: #a0a0ab;
+            --glass: rgba(18, 18, 22, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        p {
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+        #status-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #4facfe);
+            transition: width 0.2s ease-out;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        }
+        #preview-canvas {
+            width: 320px;
+            height: 180px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #000;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        .log-box {
+            text-align: left;
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: #050507;
+            border-radius: 6px;
+            padding: 1rem;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            margin-bottom: 1.5rem;
+            color: #10b981;
+        }
+        .log-entry {
+            margin-bottom: 0.25rem;
+        }
+        .btn {
+            background: var(--accent);
+            color: #0a0a0c;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .btn:hover {
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            transform: translateY(-1px);
+        }
+        .btn:disabled {
+            background: #27272a;
+            color: #71717a;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        .success-icon {
+            font-size: 3rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon" id="success-icon">✓</div>
+        <h1 id="title">Kinza Video Compiler</h1>
+        <p id="description">Convert 51 JPEG frames into a high-quality WebM video and save it directly to the workspace.</p>
+        
+        <canvas id="preview-canvas" width="1280" height="720"></canvas>
+        
+        <div id="status-card">
+            <div id="status-text">Click "Start Conversion" to begin...</div>
+            <div class="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="log-box" id="log-box">
+            <div class="log-entry">System ready.</div>
+        </div>
+
+        <button class="btn" id="start-btn">Start Conversion</button>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const canvas = document.getElementById('preview-canvas');
+        const ctx = canvas.getContext('2d');
+        const statusText = document.getElementById('status-text');
+        const progressBar = document.getElementById('progress-bar');
+        const logBox = document.getElementById('log-box');
+        const successIcon = document.getElementById('success-icon');
+        
+        const frameCount = 51;
+        const fps = 30; // Speed of scroll animation
+        const images = [];
+
+        function log(message) {
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logBox.appendChild(entry);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        function updateProgress(percent, text) {
+            progressBar.style.width = `${percent}%`;
+            statusText.textContent = text;
+        }
+
+        startBtn.addEventListener('click', async () => {
+            startBtn.disabled = true;
+            canvas.style.display = 'inline-block';
+            
+            try {
+                // 1. Preload Images
+                log('Starting image preloading...');
+                for (let i = 1; i <= frameCount; i++) {
+                    const progress = Math.round((i / frameCount) * 100);
+                    updateProgress(progress * 0.3, `Loading frames: ${i}/${frameCount}`);
+                    
+                    const img = await new Promise((resolve, reject) => {
+                        const img = new Image();
+                        img.src = `kinzaanimate/ezgif-frame-${String(i).padStart(3, '0')}.jpg`;
+                        img.onload = () => resolve(img);
+                        img.onerror = () => reject(new Error(`Failed to load ${img.src}`));
+                    });
+                    images.push(img);
+                }
+                log(`Loaded ${images.length} frames successfully.`);
+
+                // 2. Set Canvas Size based on first image to maintain aspect ratio
+                const firstImg = images[0];
+                canvas.width = firstImg.naturalWidth || 1920;
+                canvas.height = firstImg.naturalHeight || 1080;
+                log(`Canvas resolution set to ${canvas.width}x${canvas.height}`);
+
+                // 3. Setup Media Recorder
+                log('Configuring MediaRecorder...');
+                const stream = canvas.captureStream(fps);
+                
+                // Try vp9 or vp8 for WebM
+                let options = { mimeType: 'video/webm;codecs=vp9' };
+                if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+                    options = { mimeType: 'video/webm;codecs=vp8' };
+                }
+                if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+                    options = { mimeType: 'video/webm' };
+                }
+                log(`Selected MIME type: ${options.mimeType}`);
+
+                const recorder = new MediaRecorder(stream, options);
+                const chunks = [];
+
+                recorder.ondataavailable = (e) => {
+                    if (e.data && e.data.size > 0) {
+                        chunks.push(e.data);
+                    }
+                };
+
+                // 4. Start recording and render loop
+                const recordPromise = new Promise((resolve) => {
+                    recorder.onstop = () => resolve();
+                });
+
+                recorder.start();
+                log('MediaRecorder started. Beginning rendering...');
+                
+                let currentFrameIndex = 0;
+                const interval = 1000 / fps;
+
+                // Render each frame sequentially
+                for (let i = 0; i < images.length; i++) {
+                    ctx.drawImage(images[i], 0, 0, canvas.width, canvas.height);
+                    
+                    const progress = Math.round((i / images.length) * 100);
+                    updateProgress(30 + progress * 0.4, `Compiling video frames: ${i + 1}/${frameCount}`);
+                    
+                    // Wait for the next frame time slot
+                    await new Promise(r => setTimeout(r, interval));
+                }
+
+                // Stop recorder and wait for chunks to compile
+                log('Rendering finished. Stopping MediaRecorder...');
+                recorder.stop();
+                await recordPromise;
+                log('Recorder stopped. Compiling blob...');
+
+                const videoBlob = new Blob(chunks, { type: 'video/webm' });
+                log(`WebM Blob compiled. Size: ${(videoBlob.size / 1024 / 1024).toFixed(2)} MB.`);
+
+                // 5. Upload file to server
+                log('Uploading video to local server...');
+                updateProgress(85, 'Uploading video to server...');
+                
+                const response = await fetch('/save-video', {
+                    method: 'POST',
+                    body: videoBlob,
+                    headers: {
+                        'Content-Type': 'application/octet-stream'
+                    }
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    log('Server response: Success! Video saved to workspace.');
+                    updateProgress(100, 'Conversion complete!');
+                    successIcon.style.display = 'block';
+                    canvas.style.display = 'none';
+                    document.getElementById('description').textContent = 'Your video has been compiled and saved to kinzaanimate/animation.webm';
+                    document.getElementById('title').textContent = 'Success!';
+                } else {
+                    throw new Error(result.error || 'Server failed to save video');
+                }
+
+            } catch (err) {
+                console.error(err);
+                log(`Error: ${err.message}`);
+                updateProgress(0, 'Failed!');
+                statusText.style.color = '#ef4444';
+                statusText.textContent = `Error: ${err.message}`;
+                startBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

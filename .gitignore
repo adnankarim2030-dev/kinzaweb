@@ -1,0 +1,14 @@
+# Exclude large zip files and design archives
+*.zip
+design/
+
+# Exclude scratch directory and temporary files
+scratch/
+.temp/
+.DS_Store
+
+# Exclude node modules if any
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

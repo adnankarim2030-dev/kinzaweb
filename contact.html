@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us | Kinza Beverages</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dad9e1",
+                    "inverse-primary": "#b5c4ff",
+                    "deep-navy": "#103A62",
+                    "cola-blue": "#314DA0",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#693c00",
+                    "secondary-fixed-dim": "#ffb86e",
+                    "on-tertiary-fixed": "#131f00",
+                    "surface-variant": "#e3e1e9",
+                    "on-primary-container": "#b5c4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#2c4200",
+                    "pure-white": "#FFFFFF",
+                    "surface-container-low": "#f4f3fa",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "primary-container": "#314da0",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#3e5b00",
+                    "on-primary-fixed": "#00164e",
+                    "orange-burst": "#F39200",
+                    "frost-gray": "#F9FAFB",
+                    "outline": "#757683",
+                    "on-tertiary-container": "#9dd82c",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "lemon-yellow": "#FFD100",
+                    "primary": "#143588",
+                    "on-surface": "#1a1b21",
+                    "tertiary-fixed": "#b8f649",
+                    "on-tertiary-fixed-variant": "#354e00",
+                    "secondary-container": "#fc9910",
+                    "surface-container-highest": "#e3e1e9",
+                    "inverse-on-surface": "#f1f0f8",
+                    "primary-fixed": "#dce1ff",
+                    "secondary": "#8a5100",
+                    "background": "#faf8ff",
+                    "surface-tint": "#3e59ad",
+                    "tertiary-fixed-dim": "#9dd82c",
+                    "surface-bright": "#faf8ff",
+                    "on-secondary-fixed": "#2c1600",
+                    "surface-container": "#eeedf5",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#643900",
+                    "citrus-green": "#84BD00",
+                    "on-background": "#1a1b21",
+                    "surface-container-high": "#e9e7ef",
+                    "on-surface-variant": "#444651",
+                    "secondary-fixed": "#ffdcbd",
+                    "on-primary-fixed-variant": "#234194",
+                    "inverse-surface": "#2f3036",
+                    "on-error-container": "#93000a",
+                    "surface": "#faf8ff",
+                    "outline-variant": "#c5c5d3",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "base": "8px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Hanken Grotesk"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700"}],
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .chilled-shadow {
+            box-shadow: 0 20px 40px -10px rgba(49, 77, 160, 0.15);
+        }
+        .inner-glow-btn {
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-orange-burst selection:text-pure-white">
+<!-- TopNavBar -->
+<style>
+@keyframes flag-wave {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-1.5px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+@keyframes flag-shine {
+  0% { opacity: 0.9; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8)); }
+  100% { opacity: 0.9; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
+}
+.flag-wave-anim {
+  animation: flag-wave 3s ease-in-out infinite;
+}
+.flag-shine-anim {
+  animation: flag-shine 2s infinite;
+}
+</style>
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-container-max rounded-full border border-pure-white/20 bg-pure-white/70 backdrop-blur-xl flex justify-between items-center px-8 py-4 z-50 shadow-xl shadow-cola-blue/10" id="TopNavBar">
+<div class="flex items-center gap-3">
+<img alt="Kinza Logo" class="h-10 w-auto hover:scale-105 transition-transform duration-300" src="images/img_1.png"/>
+<span class="font-display-lg text-display-lg-mobile md:text-display-lg font-extrabold text-primary tracking-tighter">Kinza</span>
+<div class="relative flex items-center flag-wave-anim ml-1">
+  <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-500/25 animate-ping"></span>
+  <span class="relative flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-emerald-800 text-[10px] text-pure-white font-bold px-2 py-0.5 rounded-full border border-emerald-400/20 shadow-md flag-shine-anim">
+    <svg class="h-3 w-auto rounded-sm" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="200" fill="#005A36" />
+      <rect width="75" height="200" fill="#FFFFFF" />
+      <circle cx="187.5" cy="100" r="60" fill="#FFFFFF" />
+      <circle cx="202.5" cy="85" r="60" fill="#005A36" />
+      <polygon points="187.5,75 192.5,90 207.5,90 195,100 200,115 187.5,105 175,115 180,100 167.5,90 182.5,90" fill="#FFFFFF" />
+    </svg>
+    PK
+  </span>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="index.html">Home</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="about.html">About Us</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="products.html">Flavors</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="gallery.html">Gallery</a>
+<a class="font-label-lg text-label-lg text-primary border-b-2 border-orange-burst font-bold pb-1 hover:scale-105 transition-all" href="contact.html">Contact</a>
+</div>
+<button onclick="window.location.href='gallery.html'" class="hidden md:block bg-primary text-pure-white px-6 py-2 rounded-full font-label-lg text-label-lg hover:scale-105 transition-all active:scale-95 shadow-md shadow-primary/20">
+            Where to Buy
+        </button>
+<!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors z-50">
+            <span class="material-symbols-outlined text-[28px] !leading-none" id="menu-icon" style="font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;">menu</span>
+        </button>
+</nav>
+<!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed top-24 left-1/2 -translate-x-1/2 w-[90%] bg-pure-white/95 dark:bg-black/95 backdrop-blur-2xl rounded-2xl border border-pure-white/20 p-6 z-40 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-4 md:hidden">
+            <div class="flex flex-col gap-3">
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="index.html">Home</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="about.html">About Us</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="products.html">Flavors</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="gallery.html">Gallery</a>
+                <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-primary font-bold border-l-4 border-orange-burst pl-3" href="contact.html">Contact</a>
+                <button onclick="window.location.href='gallery.html'" class="w-full bg-primary text-pure-white py-3 rounded-full font-label-lg mt-3 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                    Where to Buy
+                </button>
+            </div>
+        </div>
+<!-- Main Content Canvas -->
+<main class="relative pt-32 pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto overflow-hidden">
+<!-- Atmospheric Background Element -->
+<!-- Header Section -->
+<header class="text-center mb-16 relative">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-4">Get in Touch</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Have a question or looking to partner with Saudi Arabia's favorite refreshing beverage? We're here to chill and chat.
+            </p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Contact Form Card -->
+<section class="lg:col-span-7 bg-transparent rounded-[2rem] p-8 md:p-12">
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant ml-1">Name</label>
+<input class="w-full bg-pure-white border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all px-4 py-3 text-body-md rounded-t-lg shadow-sm" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant ml-1">Email</label>
+<input class="w-full bg-pure-white border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all px-4 py-3 text-body-md rounded-t-lg shadow-sm" placeholder="john@example.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant ml-1">Subject</label>
+<select class="w-full bg-pure-white border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all px-4 py-3 text-body-md rounded-t-lg appearance-none shadow-sm">
+<option>General Inquiry</option>
+<option>Partnership &amp; Distribution</option>
+<option>Marketing &amp; Events</option>
+<option>Feedback</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant ml-1">Message</label>
+<textarea class="w-full bg-pure-white border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all px-4 py-3 text-body-md rounded-t-lg resize-none shadow-sm" placeholder="Tell us how we can help..." rows="5"></textarea>
+</div>
+<button class="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-primary to-cola-blue text-on-primary rounded-full font-label-lg text-label-lg inner-glow-btn hover:scale-105 transition-transform shadow-lg flex items-center justify-center gap-2">
+                        Send Message
+                        <span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</form>
+</section>
+<!-- Sidebar Info Section -->
+<aside class="lg:col-span-5 space-y-6">
+<!-- Business Inquiry Card -->
+<div class="bg-transparent rounded-[2rem] p-8 border-l-4 border-l-orange-burst">
+<h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-burst" data-weight="fill">handshake</span>
+                        Partnerships
+                    </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                        Interested in becoming a distributor or stockist? Our regional sales team is ready to expand the Kinza reach with you.
+                    </p>
+<a class="text-primary font-bold hover:underline bg-pure-white px-4 py-2 rounded-lg shadow-sm inline-block" href="mailto:partners@kinza.com">partners@kinza.com</a>
+</div>
+<!-- Social & Locations Card -->
+<div class="bg-transparent rounded-[2rem] p-8">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Stay Connected</h3>
+<div class="flex gap-4 mb-8">
+<a class="w-12 h-12 rounded-full bg-pure-white flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all shadow-sm" href="#">
+<span class="material-symbols-outlined">face_nod</span>
+</a>
+<a class="w-12 h-12 rounded-full bg-pure-white flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all shadow-sm" href="#">
+<span class="material-symbols-outlined">photo_camera</span>
+</a>
+<a class="w-12 h-12 rounded-full bg-pure-white flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all shadow-sm" href="#">
+<span class="material-symbols-outlined">video_library</span>
+</a>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4 bg-pure-white p-4 rounded-2xl shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-cola-blue/10 flex items-center justify-center text-cola-blue flex-shrink-0">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-primary">Headquarters (KSA)</p>
+<p class="font-body-md text-body-md text-on-surface-variant">King Fahad Road, Riyadh, Saudi Arabia</p>
+</div>
+</div>
+<div class="flex gap-4 bg-pure-white p-4 rounded-2xl shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-cola-blue/10 flex items-center justify-center text-cola-blue flex-shrink-0">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-primary">Pakistan Office</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Main DHA Phase 4, Karachi, Pakistan</p>
+</div>
+</div>
+<div class="flex gap-4 bg-pure-white p-4 rounded-2xl shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-cola-blue/10 flex items-center justify-center text-cola-blue flex-shrink-0">
+<span class="material-symbols-outlined">phone</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-primary">Customer Care</p>
+<p class="font-body-md text-body-md text-on-surface-variant">800-KINZA-BLUE (546-92)</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- 3D Map Section -->
+<section class="mt-gutter">
+<div class="relative w-full h-[400px] rounded-[3rem] overflow-hidden chilled-shadow bg-transparent">
+<!-- Overlay for premium feel -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none z-10"></div>
+<!-- Interactive 3D Map Placeholder -->
+<div class="w-full h-full bg-surface-dim relative group cursor-crosshair">
+<img class="w-full h-full object-cover" data-alt="A high-end 3D digital illustration blending iconic landmarks from Riyadh and Karachi, Pakistan (such as the Mazar-e-Quaid and Habib Bank Plaza alongside Riyadh's Kingdom Centre) emerging together from a pool of crystal-clear, bubbling carbonated soda water." data-location="Karachi & Riyadh" src="images/pakistan_ksa_landmarks.png"/>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+<div class="bg-primary text-on-primary p-4 rounded-2xl shadow-2xl animate-bounce flex items-center gap-2">
+<span class="material-symbols-outlined" data-weight="fill">location_on</span>
+<span class="font-bold">Karachi &amp; Riyadh Hubs</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[3rem] mt-20 bg-deep-navy shadow-[0_-10px_40px_rgba(16,58,98,0.2)]">
+<div class="container mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter py-16 text-pure-white font-body-md">
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<img alt="Kinza Logo" class="h-12 w-auto brightness-0 invert opacity-100" src="images/img_1.png"/>
+<span class="font-headline-lg text-headline-lg text-orange-burst">Kinza</span>
+</div>
+<p class="text-surface-variant/80">Refreshing the Kingdom with every drop. Experience the authentic taste of Saudi pride.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-lg text-label-lg text-lemon-yellow uppercase tracking-widest">Navigation</h4>
+<ul class="space-y-2">
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="index.html">Home</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="about.html">About Us</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="products.html">Flavors</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="gallery.html">Gallery</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-lg text-label-lg text-lemon-yellow uppercase tracking-widest">Resources</h4>
+<ul class="space-y-2">
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="#">Privacy Policy</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="#">Terms of Service</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="#">FAQ</a></li>
+<li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="#">Careers</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-lg text-label-lg text-lemon-yellow uppercase tracking-widest">Newsletter</h4>
+<div class="flex gap-2">
+<input class="bg-pure-white/10 border-0 rounded-lg px-4 py-2 w-full focus:ring-1 focus:ring-orange-burst text-pure-white" placeholder="Email" type="email"/>
+<button class="bg-orange-burst text-deep-navy px-4 py-2 rounded-lg font-bold hover:bg-lemon-yellow transition-colors">Join</button>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-surface-variant/80 cursor-pointer hover:text-pure-white">face_nod</span>
+<span class="material-symbols-outlined text-surface-variant/80 cursor-pointer hover:text-pure-white">photo_camera</span>
+<span class="material-symbols-outlined text-surface-variant/80 cursor-pointer hover:text-pure-white">video_library</span>
+</div>
+</div>
+</div>
+<div class="border-t border-pure-white/10 py-8 text-center text-surface-variant/50 font-label-sm text-label-sm">
+            © 2024 Kinza Beverages. Refreshing the Kingdom.
+        </div>
+</footer>
+<script>
+        // Micro-interactions for form inputs
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').classList.replace('text-on-surface-variant', 'text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').classList.replace('text-primary', 'text-on-surface-variant');
+            });
+        });
+
+        // Hover effect for the 3D Map
+        const mapContainer = document.querySelector('section.mt-gutter');
+        mapContainer.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = mapContainer.getBoundingClientRect();
+            const x = (e.clientX - left) / width - 0.5;
+            const y = (e.clientY - top) / height - 0.5;
+            
+            const img = mapContainer.querySelector('img');
+            if(img) {
+                img.style.transform = `scale(1.1) translate(${x * 20}px, ${y * 20}px) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
+            }
+        });
+        mapContainer.addEventListener('mouseleave', () => {
+            const img = mapContainer.querySelector('img');
+            if(img) {
+                img.style.transform = 'scale(1) translate(0,0) rotateX(0) rotateY(0)';
+            }
+        });
+    </script>
+<!-- Mobile Menu Script -->
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isClosed = mobileMenu.classList.contains('opacity-0');
+                    if (isClosed) {
+                        // Open Menu
+                        mobileMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-4');
+                        mobileMenu.classList.add('opacity-100', 'translate-y-0');
+                        if (menuIcon) {
+                            menuIcon.textContent = 'close';
+                            menuIcon.style.color = '#F39200'; // accent highlight on open
+                        }
+                    } else {
+                        // Close Menu
+                        closeMenu();
+                    }
+                });
+
+                // Helper to close menu
+                const closeMenu = () => {
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+                    mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+                    if (menuIcon) {
+                        menuIcon.textContent = 'menu';
+                        menuIcon.style.color = '';
+                    }
+                };
+
+                // Close menu if clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        closeMenu();
+                    }
+                });
+
+                // Close menu on window resize if crossing md breakpoint
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 768) {
+                        closeMenu();
+                    }
+                });
+            }
+        });
+        </script>
+</body></html>
