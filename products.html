@@ -134,11 +134,27 @@
   50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8)); }
   100% { opacity: 0.9; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
 }
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+@keyframes float-slow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
 .flag-wave-anim {
   animation: flag-wave 3s ease-in-out infinite;
 }
 .flag-shine-anim {
   animation: flag-shine 2s infinite;
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
 }
 </style>
 <nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-container-max rounded-full border border-pure-white/20 bg-pure-white/70 backdrop-blur-xl flex justify-between items-center px-8 py-4 z-50 shadow-xl shadow-cola-blue/10" id="TopNavBar">

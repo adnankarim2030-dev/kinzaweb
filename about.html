@@ -148,11 +148,27 @@
   50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8)); }
   100% { opacity: 0.9; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
 }
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+@keyframes float-slow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
 .flag-wave-anim {
   animation: flag-wave 3s ease-in-out infinite;
 }
 .flag-shine-anim {
   animation: flag-shine 2s infinite;
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
 }
 </style>
 <nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-container-max rounded-full border border-pure-white/20 bg-pure-white/70 backdrop-blur-xl flex justify-between items-center px-8 py-4 z-50 shadow-xl shadow-cola-blue/10" id="TopNavBar">
@@ -202,13 +218,19 @@
             </div>
         </div>
 <!-- Hero Section -->
-<header class="relative min-h-[819px] flex items-center justify-center pt-24 overflow-hidden">
-<div class="relative z-10 text-center max-w-4xl px-margin-mobile">
-<span class="inline-block bg-primary-container/10 text-primary px-4 py-1 rounded-full font-label-sm text-label-sm mb-6 tracking-widest uppercase">The Kinza Journey</span>
-<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-deep-navy mb-6">From the Kingdom to the<br/><span class="text-orange-burst">Heart of Pakistan.</span></h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Kinza is more than a beverage; it's a cross-cultural celebration of ambition, quality, and the refreshing spirit of a global community.</p>
+<header class="relative min-h-[70vh] flex items-center justify-center pt-24 overflow-hidden">
+<div class="absolute inset-0 z-0">
+  <img src="images/about_us_banner.png" alt="Kinza Cultural Celebration" class="w-full h-full object-cover opacity-90 mix-blend-overlay">
+  <div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/80 to-deep-navy/30"></div>
 </div>
-<div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-full max-w-5xl h-64 blur-3xl opacity-20 bg-gradient-to-t from-cola-blue to-transparent"></div>
+<div class="relative z-10 text-center max-w-5xl px-margin-mobile flex flex-col items-center">
+<span class="inline-block bg-primary/20 backdrop-blur-md text-deep-navy border border-primary/30 px-6 py-2 rounded-full font-label-lg tracking-widest uppercase mb-6 shadow-xl animate-float">The Kinza Journey</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-[80px] leading-tight text-deep-navy mb-6 font-extrabold animate-float-slow" style="text-shadow: 0 4px 30px rgba(255,255,255,0.8);">
+From the Kingdom to the<br/><span class="text-orange-burst">Heart of Pakistan.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-deep-navy/80 max-w-3xl mx-auto font-semibold bg-pure-white/40 backdrop-blur-md p-6 rounded-3xl border border-pure-white/60 shadow-2xl animate-float">Kinza is more than a beverage; it's a cross-cultural celebration of ambition, quality, and the refreshing spirit of a global community.</p>
+</div>
+<div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-full max-w-5xl h-64 blur-3xl opacity-30 bg-gradient-to-t from-cola-blue to-transparent"></div>
 </header>
 <!-- Origin Story: Legacy Section -->
 <section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto overflow-hidden">
