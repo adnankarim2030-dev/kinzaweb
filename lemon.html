@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Kinza Lemon | Kinza Beverages</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes flag-shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        .flag-shine-anim::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: flag-shine 2s infinite;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "primary": "#001A36",
+                "on-primary": "#ffffff",
+                "pure-white": "#FFFFFF",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#f4f3fa",
+                "deep-navy": "#001A36",
+                "cola-blue": "#314DA0",
+                "orange-burst": "#F39200",
+                "citrus-green": "#008B47",
+                "lemon-yellow": "#D4B800"
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-[#001A36] font-body-md overflow-x-hidden min-h-screen">
+
+<!-- Preloader -->
+<div id="site-opener" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-deep-navy text-pure-white transition-all duration-1000 ease-in-out" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #001A36;">
+  <style>
+    @keyframes zoom-flash-in {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+        filter: brightness(0) invert(1) drop-shadow(0 0 0px rgba(255,255,255,0));
+      }
+      50% {
+        filter: brightness(0) invert(1) drop-shadow(0 0 30px rgba(255, 255, 255, 1));
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(243, 146, 0, 0.4));
+      }
+    }
+    @keyframes slide-in-left {
+      0% { opacity: 0; transform: translateX(-150px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slide-in-right {
+      0% { opacity: 0; transform: translateX(150px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes shine-sweep {
+      to { background-position: 200% center; }
+    }
+    .opener-logo-flag {
+      animation: zoom-flash-in 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .opener-text-left {
+      animation: slide-in-left 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards, shine-sweep 3s linear infinite;
+    }
+    .opener-text-right {
+      animation: slide-in-right 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards, shine-sweep 3s linear infinite 0.5s;
+    }
+    .text-shine-orange {
+      background: linear-gradient(to right, #F39200 20%, #FFFFFF 40%, #FFFFFF 60%, #F39200 80%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .text-shine-white {
+      background: linear-gradient(to right, #FFFFFF 20%, #F39200 40%, #F39200 60%, #FFFFFF 80%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  </style>
+  <div class="absolute w-80 h-80 rounded-full bg-pure-white/10 blur-3xl pointer-events-none -z-10 animate-pulse" style="animation-duration: 3s;"></div>
+  <div class="flex flex-col items-center gap-8 max-w-xl px-6 text-center z-10">
+    <div class="flex items-center gap-5 opener-logo-flag opacity-0">
+      <img alt="Kinza Logo" class="h-28 w-auto brightness-0 invert" src="images/img_1.png"/>
+      <div class="relative flex items-center h-16">
+        <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-500/30 animate-ping"></span>
+        <svg width="45" height="30" class="h-14 w-auto rounded-md shadow-2xl border border-emerald-400/20" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="200" fill="#005A36" />
+          <rect width="75" height="200" fill="#FFFFFF" />
+          <circle cx="187.5" cy="100" r="60" fill="#FFFFFF" />
+          <circle cx="202.5" cy="85" r="60" fill="#005A36" />
+          <polygon points="187.5,75 192.5,90 207.5,90 195,100 200,115 187.5,105 175,115 180,100 167.5,90 182.5,90" fill="#FFFFFF" />
+        </svg>
+      </div>
+    </div>
+    <div class="space-y-4 overflow-hidden py-2">
+      <div class="opener-text-left opacity-0 text-7xl md:text-8xl font-extrabold tracking-tighter text-shine-orange">Kinza</div>
+      <div class="opener-text-right opacity-0 text-2xl md:text-3xl font-bold tracking-widest text-shine-white">WELCOME PAKISTAN</div>
+    </div>
+  </div>
+</div>
+
+<!-- Header / Nav -->
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-[1200px] rounded-full border border-pure-white/20 bg-pure-white/70 backdrop-blur-xl flex justify-between items-center px-8 py-4 z-50 shadow-xl shadow-cola-blue/10" id="TopNavBar">
+    <div class="flex items-center gap-3">
+        <img alt="Kinza Logo" class="h-10 w-auto hover:scale-105 transition-transform duration-300 pointer-events-none" src="images/img_1.png"/>
+        <span class="font-display-lg text-[20px] font-extrabold text-primary tracking-tighter">Kinza</span>
+        <div class="relative flex items-center ml-1">
+            <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-500/25 animate-ping"></span>
+            <span class="relative flex items-center gap-1 bg-gradient-to-r from-emerald-600 to-emerald-800 text-[10px] text-pure-white font-bold px-2 py-0.5 rounded-full border border-emerald-400/20 shadow-md flag-shine-anim">
+                <svg width="18" height="12" class="h-3 w-auto rounded-sm" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="200" fill="#005A36" />
+                    <rect width="75" height="200" fill="#FFFFFF" />
+                    <circle cx="187.5" cy="100" r="60" fill="#FFFFFF" />
+                    <circle cx="202.5" cy="85" r="60" fill="#005A36" />
+                    <polygon points="187.5,75 192.5,90 207.5,90 195,100 200,115 187.5,105 175,115 180,100 167.5,90 182.5,90" fill="#FFFFFF" />
+                </svg>
+                PK
+            </span>
+        </div>
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+        <a class="font-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="index.html">Home</a>
+        <a class="font-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="about.html">About Us</a>
+        <a class="font-label-lg text-primary border-b-2 border-orange-burst font-bold pb-1 hover:scale-105 transition-all" href="products.html">Flavors</a>
+        <a class="font-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="gallery.html">Gallery</a>
+        <a class="font-label-lg text-on-surface-variant hover:text-primary hover:scale-105 transition-all" href="contact.html">Contact</a>
+    </div>
+    <button onclick="window.location.href='gallery.html'" class="hidden md:block bg-primary text-pure-white px-6 py-2 rounded-full font-label-lg hover:scale-105 transition-all active:scale-95 shadow-md shadow-primary/20">
+        Where to Buy
+    </button>
+    <button id="mobile-menu-btn" class="md:hidden text-primary focus:outline-none flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors z-50">
+        <span class="material-symbols-outlined text-[28px] !leading-none" id="menu-icon">menu</span>
+    </button>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed top-24 left-1/2 -translate-x-1/2 w-[90%] bg-pure-white/95 backdrop-blur-2xl rounded-2xl border border-pure-white/20 p-6 z-40 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-4 md:hidden">
+    <div class="flex flex-col gap-3">
+        <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="index.html">Home</a>
+        <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="about.html">About Us</a>
+        <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-primary font-bold border-l-4 border-orange-burst pl-3" href="products.html">Flavors</a>
+        <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="gallery.html">Gallery</a>
+        <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="contact.html">Contact</a>
+        <button onclick="window.location.href='gallery.html'" class="w-full bg-primary text-pure-white py-3 rounded-xl font-label-lg hover:bg-primary/95 mt-2">
+            Where to Buy
+        </button>
+    </div>
+</div>
+
+<!-- Product Details Section -->
+<main class="pt-32 pb-24 px-4 max-w-[1200px] mx-auto">
+    <!-- Back to Flavors Link -->
+    <div class="mb-8">
+        <a href="products.html" class="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary font-semibold transition-colors">
+            <span class="material-symbols-outlined text-lg leading-none">arrow_back</span>
+            <span>Back to Flavors</span>
+        </a>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left Side: 3D Product Visuals & Interactive Variations (cols: 5) -->
+        <div class="lg:col-span-5 flex flex-col gap-8">
+            <!-- Product Showroom Card -->
+            <div class="relative bg-white rounded-[2.5rem] border border-slate-100 shadow-xl p-8 overflow-hidden flex flex-col items-center justify-center min-h-[450px]">
+                <!-- Glow backdrop -->
+                <div class="absolute w-72 h-72 rounded-full blur-3xl pointer-events-none scale-90 transition-transform duration-700" style="background-color: rgba(212, 184, 0, 0.4); top: 15%; left: 15%;"></div>
+                
+                <!-- Floating Can Image -->
+                <img id="product-display-img" src="images/img_14.png" alt="Kinza Lemon" class="h-80 w-auto object-contain z-10 animate-float drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)]"/>
+                
+                <!-- Badges -->
+                <div class="flex flex-wrap justify-center gap-2 mt-8 z-10">
+                    <span class="bg-slate-100 text-slate-800 text-xs font-semibold px-3 py-1 rounded-full border border-slate-200">100% Sour Lemon Zest</span><span class="bg-slate-100 text-slate-800 text-xs font-semibold px-3 py-1 rounded-full border border-slate-200">Extra Crispy Bubbles</span><span class="bg-slate-100 text-slate-800 text-xs font-semibold px-3 py-1 rounded-full border border-slate-200">Ultra Clean Blend</span>
+                </div>
+            </div>
+
+            <!-- Variation Selector Card -->
+            <div class="bg-white rounded-[2rem] border border-slate-100 shadow-lg p-6">
+                <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">inventory_2</span>
+                    Select Product Variation
+                </h3>
+                <div class="grid grid-cols-2 gap-3" id="variation-selector">
+                    
+                    <button type="button" onclick="selectVariant('250ml Can', 'Pack of 30 Cans', 0)" class="variant-btn flex flex-col items-start p-4 rounded-2xl border text-left transition-all duration-300 border-primary bg-slate-50 ring-2 ring-primary/20" data-index="0">
+                        <span class="font-bold text-slate-800 text-base mb-1">250ml Can</span>
+                        <span class="text-xs text-slate-500">Pack of 30 Cans</span>
+                    </button>
+                    
+                    <button type="button" onclick="selectVariant('330ml Can', 'Pack of 24 Cans', 1)" class="variant-btn flex flex-col items-start p-4 rounded-2xl border text-left transition-all duration-300 border-slate-200 hover:border-slate-300" data-index="1">
+                        <span class="font-bold text-slate-800 text-base mb-1">330ml Can</span>
+                        <span class="text-xs text-slate-500">Pack of 24 Cans</span>
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Product Details & Order Form (cols: 7) -->
+        <div class="lg:col-span-7 flex flex-col gap-8">
+            <!-- Details Header Card -->
+            <div class="bg-white rounded-[2rem] border border-slate-100 shadow-lg p-8">
+                <span class="text-xs font-bold uppercase tracking-widest" style="color: #D4B800;">CRISP & SOUR ZEST</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-primary mt-2 mb-4">Kinza Lemon</h1>
+                <p class="text-slate-600 text-lg leading-relaxed mb-6">A clean, sharp lemon sparkler featuring pure taste. It offers a perfectly balanced sour punch with zero sugar or guilt, keeping you hydrated and fresh.</p>
+                <div class="flex items-center gap-4 py-4 border-t border-slate-100">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-emerald-600">verified</span>
+                        <span class="text-sm font-bold text-slate-700">100% Halal Certified</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">local_shipping</span>
+                        <span class="text-sm font-bold text-slate-700">Wholesale Delivery Across Pakistan</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order / Inquiry Form Card -->
+            <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl p-8 relative overflow-hidden" id="order-form-card">
+                <div class="absolute top-0 left-0 w-full h-1.5" style="background-color: #D4B800;"></div>
+                <h2 class="text-2xl font-extrabold text-slate-800 mb-2">Wholesale Inquiry & Order Form</h2>
+                <p class="text-slate-500 text-sm mb-6">Fill in the details below to request a wholesale quotation or place a bulk order. No pricing details are required upfront.</p>
+                
+                <form id="wholesale-inquiry-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <!-- Name & Company Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Your Full Name *</label>
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">person</span>
+                                <input type="text" required class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all text-sm" placeholder="Adnan Karim"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Company / Shop Name</label>
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">storefront</span>
+                                <input type="text" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all text-sm" placeholder="Karim Beverages Store"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact & City Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">WhatsApp / Phone Number *</label>
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">call</span>
+                                <input type="tel" required class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all text-sm" placeholder="03XXXXXXXXX"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Select Delivery City *</label>
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">location_city</span>
+                                <select required class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all text-sm appearance-none">
+                                    <option value="" disabled selected>Select your city</option>
+                                    <option value="Karachi">Karachi</option>
+                                    <option value="Lahore">Lahore</option>
+                                    <option value="Islamabad">Islamabad</option>
+                                    <option value="Rawalpindi">Rawalpindi</option>
+                                    <option value="Faisalabad">Faisalabad</option>
+                                    <option value="Multan">Multan</option>
+                                    <option value="Peshawar">Peshawar</option>
+                                    <option value="Gujranwala">Gujranwala</option>
+                                    <option value="Sialkot">Sialkot</option>
+                                    <option value="Quetta">Quetta</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Address -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Delivery Address *</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-3 text-slate-400 text-lg">home_pin</span>
+                            <textarea required rows="3" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring focus:ring-primary/20 transition-all text-sm" placeholder="Warehouse address, Main Bazar..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Selected Variation & Quantity Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Selected Size</label>
+                            <input type="text" id="form-selected-size" readonly class="w-full bg-slate-100 border border-slate-200 text-slate-600 rounded-xl px-4 py-3 text-sm font-bold cursor-not-allowed" value="250ml Can (Pack of 30 Cans)"/>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Order Quantity (Cases) *</label>
+                            <div class="flex items-center border border-slate-200 rounded-xl overflow-hidden h-[46px]">
+                                <button type="button" onclick="adjustQty(-1)" class="px-4 bg-slate-50 hover:bg-slate-100 text-slate-600 font-bold border-r border-slate-200 h-full flex items-center justify-center transition-colors">
+                                    <span class="material-symbols-outlined text-sm">remove</span>
+                                </button>
+                                <input type="number" id="form-qty" required min="10" value="10" class="w-full text-center border-none focus:ring-0 text-sm font-bold text-slate-800" />
+                                <button type="button" onclick="adjustQty(1)" class="px-4 bg-slate-50 hover:bg-slate-100 text-slate-600 font-bold border-l border-slate-200 h-full flex items-center justify-center transition-colors">
+                                    <span class="material-symbols-outlined text-sm">add</span>
+                                </button>
+                            </div>
+                            <span class="text-[10px] text-slate-400 mt-1 block">Minimum wholesale order: 10 cases</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submit-btn" class="w-full text-pure-white font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg flag-shine-anim relative overflow-hidden" style="background-color: #D4B800; shadow-color: rgba(212, 184, 0, 0.4);">
+                        <span class="material-symbols-outlined">send</span>
+                        <span>Submit Wholesale Inquiry</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-primary text-pure-white mt-12 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(243,146,0,0.08),transparent_50%)] pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(49,77,160,0.08),transparent_50%)] pointer-events-none"></div>
+    
+    <div class="container mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter py-16">
+        <div class="col-span-1 md:col-span-1">
+            <div class="flex items-center gap-2 mb-6">
+                <img alt="Kinza Logo" class="h-12 w-auto brightness-0 invert opacity-100" src="images/img_1.png"/>
+                <span class="font-headline-lg text-headline-lg text-orange-burst">Kinza</span>
+            </div>
+            <p class="text-surface-variant/70 text-sm leading-relaxed mb-6">100% local, premium beverages crafted to deliver refreshing bubble zest in every sip. Proudly Pakistan.</p>
+        </div>
+        <div>
+            <h4 class="font-headline-md text-headline-md text-pure-white mb-6">Quick Links</h4>
+            <ul class="space-y-4">
+                <li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="index.html">Home</a></li>
+                <li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="about.html">About Us</a></li>
+                <li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="products.html">Flavors</a></li>
+                <li><a class="text-surface-variant/80 hover:text-pure-white hover:translate-x-1 transition-transform inline-block" href="gallery.html">Store Locator</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-headline-md text-headline-md text-pure-white mb-6">Our Flavors</h4>
+            <ul class="space-y-4 text-sm text-surface-variant/80">
+                <li><a class="hover:text-pure-white transition-colors" href="cola.html">Kinza Cola</a></li>
+                <li><a class="hover:text-pure-white transition-colors" href="citrus.html">Kinza Citrus</a></li>
+                <li><a class="hover:text-pure-white transition-colors" href="orange.html">Kinza Orange</a></li>
+                <li><a class="hover:text-pure-white transition-colors" href="lemon.html">Kinza Lemon</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-headline-md text-headline-md text-pure-white mb-6">Contact Us</h4>
+            <p class="text-surface-variant/80 text-sm leading-relaxed mb-4">Feel free to contact us for distributorship and wholesale orders across Pakistan.</p>
+            <p class="text-orange-burst font-bold text-lg">info@kinzabev.com</p>
+        </div>
+    </div>
+    <div class="border-t border-pure-white/10 py-6 text-center text-xs text-surface-variant/50">
+        &copy; 2026 Kinza Beverages. All Rights Reserved. Crafted with pride.
+    </div>
+</footer>
+
+<!-- Success Modal Overlay -->
+<div id="success-modal" class="fixed inset-0 z-[10000] bg-slate-900/80 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-white rounded-[2.5rem] p-8 max-w-lg w-[90%] text-center shadow-2xl relative border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300">
+        <!-- Confetti Canvas -->
+        <canvas id="confetti-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+        
+        <div class="relative z-10 flex flex-col items-center">
+            <!-- Animated Green Circle Check -->
+            <div class="w-20 h-20 bg-emerald-100 border border-emerald-200 rounded-full flex items-center justify-center mb-6 text-emerald-600 shadow-md">
+                <span class="material-symbols-outlined text-4xl font-extrabold animate-bounce">check</span>
+            </div>
+            
+            <h3 class="text-2xl font-black text-slate-800 mb-2">Wholesale Inquiry Submitted!</h3>
+            <p class="text-slate-500 text-sm mb-6">Your request has been logged successfully. No pricing or card details were required.</p>
+            
+            <!-- Summary Box -->
+            <div class="w-full bg-slate-50 rounded-2xl p-4 text-left border border-slate-100 mb-6 space-y-2 text-sm">
+                <div class="flex justify-between border-b border-slate-200/50 pb-2 mb-2 font-bold text-slate-700">
+                    <span>Order Summary</span>
+                    <span class="text-emerald-600 font-extrabold">Ready</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Product:</span>
+                    <span class="font-bold text-slate-800">Kinza Lemon</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Packaging Size:</span>
+                    <span class="font-bold text-slate-800" id="modal-summary-size">250ml Can (Pack of 30)</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Quantity (Cases):</span>
+                    <span class="font-bold text-slate-800" id="modal-summary-qty">10 Cases</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Deliver To:</span>
+                    <span class="font-bold text-slate-800" id="modal-summary-destination">Karachi</span>
+                </div>
+            </div>
+            
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">Our Kinza beverage logistics team will contact you on WhatsApp/Call within 2 hours to confirm shipping details and delivery schedule.</p>
+            
+            <!-- Modal Actions -->
+            <div class="flex gap-3 w-full">
+                <button type="button" onclick="closeSuccessModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-3.5 px-6 rounded-xl transition-all text-sm">Close</button>
+                <a href="products.html" class="flex-1 bg-primary text-pure-white font-bold py-3.5 px-6 rounded-xl transition-all text-sm flex items-center justify-center gap-2 hover:scale-[1.02]">
+                    <span>Return to Flavors</span>
+                    <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script>
+    // Fade out preloader on load
+    window.addEventListener('load', () => {
+        const opener = document.getElementById('site-opener');
+        if (opener) {
+            setTimeout(() => {
+                opener.classList.add('opacity-0', 'pointer-events-none');
+            }, 1000);
+        }
+    });
+
+    // Mobile Navbar Toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('opacity-0');
+            if (isOpen) {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+                mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+                if (menuIcon) menuIcon.textContent = 'menu';
+            } else {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-4');
+                mobileMenu.classList.add('opacity-100', 'translate-y-0');
+                if (menuIcon) menuIcon.textContent = 'close';
+            }
+        });
+        // Close menu on click outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+                mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+                if (menuIcon) menuIcon.textContent = 'menu';
+            }
+        });
+    }
+
+    // Dynamic Variation Handling
+    let activeSize = "250ml Can";
+    let activePack = "Pack of 30 Cans";
+    
+    function selectVariant(size, pack, index) {
+        activeSize = size;
+        activePack = pack;
+        
+        // Update Selector UI buttons
+        const buttons = document.querySelectorAll('.variant-btn');
+        buttons.forEach(btn => {
+            if (parseInt(btn.getAttribute('data-index')) === index) {
+                btn.classList.add('border-primary', 'bg-slate-50', 'ring-2', 'ring-primary/20');
+                btn.classList.remove('border-slate-200');
+            } else {
+                btn.classList.remove('border-primary', 'bg-slate-50', 'ring-2', 'ring-primary/20');
+                btn.classList.add('border-slate-200');
+            }
+        });
+        
+        // Update Form Input
+        document.getElementById('form-selected-size').value = size + ' (' + pack + ')';
+    }
+
+    // Quantity Adjustments
+    function adjustQty(amount) {
+        const input = document.getElementById('form-qty');
+        let val = parseInt(input.value) || 10;
+        val += amount;
+        if (val < 10) val = 10;
+        input.value = val;
+    }
+
+    // Form Submit & Confetti Modal Emitter
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        const form = document.getElementById('wholesale-inquiry-form');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        // Disable button & show loading state
+        submitBtn.disabled = true;
+        const origText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">autorenew</span><span>Processing Request...</span>';
+        
+        // Form inputs values
+        const name = form.querySelector('input[type="text"]').value;
+        const phone = form.querySelector('input[type="tel"]').value;
+        const city = form.querySelector('select').value;
+        const address = form.querySelector('textarea').value;
+        const qty = document.getElementById('form-qty').value;
+        
+        // Set success modal values
+        document.getElementById('modal-summary-size').textContent = activeSize + ' (' + activePack + ')';
+        document.getElementById('modal-summary-qty').textContent = qty + ' Cases';
+        document.getElementById('modal-summary-destination').textContent = city + ', Pakistan';
+        
+        // Simulate minor API delay for wholesale log
+        setTimeout(() => {
+            // Restore button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = origText;
+            
+            // Reset form
+            form.reset();
+            document.getElementById('form-selected-size').value = activeSize + ' (' + activePack + ')';
+            document.getElementById('form-qty').value = "10";
+            
+            // Show Success Modal with Confetti
+            openSuccessModal();
+        }, 1200);
+    }
+
+    // Success Modal Overlay Actions
+    function openSuccessModal() {
+        const modal = document.getElementById('success-modal');
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.querySelector('.transform').classList.remove('scale-95');
+        modal.querySelector('.transform').classList.add('scale-100');
+        
+        // Trigger Canvas Confetti
+        initConfetti();
+    }
+    
+    function closeSuccessModal() {
+        const modal = document.getElementById('success-modal');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.querySelector('.transform').classList.add('scale-95');
+        modal.querySelector('.transform').classList.remove('scale-100');
+        stopConfetti();
+    }
+
+    // Canvas Confetti Shower Emitter
+    let confettiInterval;
+    function initConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+        
+        const colors = ['#314DA0', '#008B47', '#F39200', '#D4B800', '#ba1a1a', '#6a2b86'];
+        const particles = [];
+        
+        for (let i = 0; i < 75; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * -100,
+                r: Math.random() * 6 + 4,
+                d: Math.random() * canvas.height,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                tilt: Math.random() * 10 - 5,
+                tiltAngleIncremental: Math.random() * 0.07 + 0.02,
+                tiltAngle: 0
+            });
+        }
+        
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, idx) => {
+                p.tiltAngle += p.tiltAngleIncremental;
+                p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                p.x += Math.sin(p.tiltAngle);
+                p.tilt = Math.sin(p.tiltAngle - idx / 3) * 15;
+                
+                ctx.beginPath();
+                ctx.lineWidth = p.r;
+                ctx.strokeStyle = p.color;
+                ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+                ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                ctx.stroke();
+            });
+            update();
+        }
+        
+        function update() {
+            particles.forEach((p) => {
+                if (p.y > canvas.height) {
+                    p.x = Math.random() * canvas.width;
+                    p.y = -20;
+                }
+            });
+        }
+        
+        confettiInterval = setInterval(draw, 24);
+    }
+    
+    function stopConfetti() {
+        clearInterval(confettiInterval);
+    }
+</script>
+</body>
+</html>

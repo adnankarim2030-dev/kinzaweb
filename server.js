@@ -60,6 +60,20 @@ const server = http.createServer((req, res) => {
         fs.readFile(filePath, (error, content) => {
             if (error) {
                 if (error.code === 'ENOENT') {
+                    // Try with .html extension for clean URLs support (like Vercel)
+                    const htmlPath = filePath + '.html';
+                    if (fs.existsSync(htmlPath)) {
+                        fs.readFile(htmlPath, (htmlErr, htmlContent) => {
+                            if (htmlErr) {
+                                res.writeHead(500);
+                                res.end(`Server Error: ${htmlErr.code}`);
+                            } else {
+                                res.writeHead(200, { 'Content-Type': 'text/html' });
+                                res.end(htmlContent, 'utf-8');
+                            }
+                        });
+                        return;
+                    }
                     res.writeHead(404, { 'Content-Type': 'text/html' });
                     res.end('<h1>404 Not Found</h1>', 'utf-8');
                 } else {
