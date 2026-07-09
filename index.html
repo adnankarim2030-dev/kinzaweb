@@ -124,84 +124,111 @@
 </head>
 <body class="bg-gradient-to-b from-primary-fixed/20 via-surface to-secondary-fixed/20 text-on-background font-body-md overflow-x-hidden min-h-screen">
 <!-- Site Opener Animation -->
-<div id="site-opener" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-deep-navy text-pure-white transition-all duration-1000 ease-in-out" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #001A36;">
+<div id="site-opener" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-deep-navy text-pure-white transition-all duration-1000 ease-in-out" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #001A36; overflow: hidden;">
   <style>
-    @keyframes zoom-flash-in {
-      0% {
-        opacity: 0;
-        transform: scale(0.5);
-        filter: brightness(0) invert(1) drop-shadow(0 0 0px rgba(255,255,255,0));
-      }
-      50% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 30px rgba(255, 255, 255, 1));
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-        filter: drop-shadow(0 0 15px rgba(243, 146, 0, 0.4));
-      }
+    @keyframes plane-fly {
+      0% { opacity: 0; transform: translate(-50vw, 50px) scale(0.5) rotate(20deg); }
+      15% { opacity: 1; transform: translate(-25vw, 20px) scale(0.8) rotate(10deg); }
+      85% { opacity: 1; transform: translate(25vw, -20px) scale(1) rotate(-5deg); }
+      100% { opacity: 0; transform: translate(50vw, -50px) scale(0.5) rotate(-15deg); }
     }
-    @keyframes slide-in-left {
-      0% { opacity: 0; transform: translateX(-150px); }
-      100% { opacity: 1; transform: translateX(0); }
+    @keyframes draw-path {
+      0% { width: 0%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { width: 80%; opacity: 1; }
+      100% { opacity: 0; }
     }
-    @keyframes slide-in-right {
-      0% { opacity: 0; transform: translateX(150px); }
-      100% { opacity: 1; transform: translateX(0); }
+    @keyframes flag-appear {
+      0% { opacity: 0; transform: scale(0.5) translateY(20px); filter: blur(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0px); }
     }
-    @keyframes shine-sweep {
-      to { background-position: 200% center; }
+    @keyframes slide-up-flags {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-30px); }
     }
-    .opener-logo-flag {
-      animation: zoom-flash-in 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    @keyframes text-reveal-glow {
+      0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0px) drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
     }
-    .opener-text-left {
-      animation: slide-in-left 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards, shine-sweep 3s linear infinite;
+    
+    .anim-plane {
+      animation: plane-fly 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
-    .opener-text-right {
-      animation: slide-in-right 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards, shine-sweep 3s linear infinite 0.5s;
+    .anim-path {
+      animation: draw-path 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
-    .text-shine-orange {
-      background: linear-gradient(to right, #F39200 20%, #FFFFFF 40%, #FFFFFF 60%, #F39200 80%);
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
+    .anim-flags-container {
+      animation: slide-up-flags 1s cubic-bezier(0.4, 0, 0.2, 1) 2.5s forwards;
     }
-    .text-shine-white {
-      background: linear-gradient(to right, #FFFFFF 20%, #F39200 40%, #F39200 60%, #FFFFFF 80%);
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
+    .anim-flag-ksa {
+      animation: flag-appear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 2.2s forwards;
+    }
+    .anim-flag-pk {
+      animation: flag-appear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 2.6s forwards;
+    }
+    .anim-text-1 {
+      animation: text-reveal-glow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 3.2s forwards;
+    }
+    .anim-text-2 {
+      animation: text-reveal-glow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 3.8s forwards;
+    }
+    .anim-text-3 {
+      animation: text-reveal-glow 1s cubic-bezier(0.34, 1.56, 0.64, 1) 4.6s forwards;
     }
   </style>
-  <!-- White Blur Gradient Background Glow -->
-  <div class="absolute w-80 h-80 rounded-full bg-pure-white/10 blur-3xl pointer-events-none -z-10 animate-pulse" style="animation-duration: 3s;"></div>
 
-  <div class="flex flex-col items-center gap-8 max-w-xl px-6 text-center z-10">
-    <!-- Logo & Flag Row -->
-    <div class="flex items-center gap-5 opener-logo-flag opacity-0">
-      <img alt="Kinza Logo" class="h-28 w-auto brightness-0 invert" src="images/img_1.png"/>
-      <div class="relative flex items-center h-16">
-        <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-500/30 animate-ping"></span>
-        <svg width="45" height="30" class="h-14 w-auto rounded-md shadow-2xl border border-emerald-400/20" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Glowing Background -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/20 via-deep-navy to-deep-navy z-0 pointer-events-none"></div>
+
+  <!-- Step 1: The Plane & Path -->
+  <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+    <div class="relative w-full max-w-5xl h-40 flex items-center justify-center">
+      <!-- Flight Path (Dotted Line) -->
+      <div class="absolute h-[2px] border-t-2 border-dashed border-emerald-400/50 anim-path opacity-0" style="width: 0%;"></div>
+      
+      <!-- Airplane SVG -->
+      <div class="absolute anim-plane opacity-0 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] text-pure-white">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(45deg);">
+          <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2C10.67 2 10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 & 3: Flags and Text -->
+  <div class="relative z-20 flex flex-col items-center justify-center gap-10 anim-flags-container pointer-events-none">
+    <!-- Flags -->
+    <div class="flex items-center gap-6 sm:gap-10">
+      <!-- KSA Flag -->
+      <div class="anim-flag-ksa opacity-0 flex flex-col items-center gap-3">
+        <img src="images/Flag_of_Saudi_Arabia.webp" alt="Saudi Arabia" class="w-24 h-16 sm:w-36 sm:h-24 object-cover rounded-md shadow-[0_0_30px_rgba(0,108,53,0.5)] border border-white/10" />
+        <span class="text-[10px] sm:text-xs tracking-[0.3em] text-white/50 uppercase font-bold">Jeddah, KSA</span>
+      </div>
+      
+      <!-- Glowing Connection -->
+      <div class="anim-flag-pk opacity-0 w-8 sm:w-20 h-[1.5px] bg-gradient-to-r from-emerald-500/0 via-emerald-400 to-emerald-500/0 relative">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,1)]"></div>
+      </div>
+
+      <!-- PK Flag -->
+      <div class="anim-flag-pk opacity-0 flex flex-col items-center gap-3">
+        <svg class="w-24 h-16 sm:w-36 sm:h-24 rounded-md shadow-[0_0_30px_rgba(0,90,54,0.5)] border border-white/10" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
           <rect width="300" height="200" fill="#005A36" />
           <rect width="75" height="200" fill="#FFFFFF" />
           <circle cx="187.5" cy="100" r="60" fill="#FFFFFF" />
           <circle cx="202.5" cy="85" r="60" fill="#005A36" />
           <polygon points="187.5,75 192.5,90 207.5,90 195,100 200,115 187.5,105 175,115 180,100 167.5,90 182.5,90" fill="#FFFFFF" />
         </svg>
+        <span class="text-[10px] sm:text-xs tracking-[0.3em] text-white/50 uppercase font-bold">Pakistan</span>
       </div>
     </div>
-    
-    <!-- Text Rows -->
-    <div class="space-y-4 overflow-hidden py-2">
-      <div class="opener-text-left opacity-0 text-7xl md:text-8xl font-extrabold tracking-tighter text-shine-orange">
-        Kinza
-      </div>
-      <div class="opener-text-right opacity-0 text-4xl md:text-5xl font-bold tracking-wide text-shine-white">
-        Welcome Pakistan
+
+    <!-- Text -->
+    <div class="text-center mt-2 px-4 max-w-3xl">
+      <h3 class="anim-text-1 opacity-0 text-lg sm:text-2xl font-light tracking-wide text-white/80 mb-3">From the Kingdom of Saudi Arabia...</h3>
+      <h2 class="anim-text-2 opacity-0 text-2xl sm:text-5xl font-extrabold tracking-tight text-white mb-8 leading-tight">Bringing the Refreshing Spirit to the <br/> <span class="text-emerald-400">Heart of Pakistan</span></h2>
+      <div class="anim-text-3 opacity-0">
+        <img alt="Kinza Logo" class="h-16 sm:h-24 w-auto brightness-0 invert mx-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" src="images/kinza_logo_arabic.png"/>
       </div>
     </div>
   </div>
@@ -733,14 +760,13 @@
             // Site Opener Fade Out
             const opener = document.getElementById('site-opener');
             if (opener) {
-                document.body.style.overflow = 'hidden';
                 setTimeout(() => {
                     opener.classList.add('opacity-0', 'pointer-events-none');
                     document.body.style.overflow = '';
                     setTimeout(() => {
                         opener.remove();
                     }, 1000);
-                }, 3200);
+                }, 6500);
             }
 
             const menuBtn = document.getElementById('mobile-menu-btn');
