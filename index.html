@@ -127,15 +127,15 @@
 <div id="site-opener" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-deep-navy text-pure-white transition-all duration-1000 ease-in-out" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #001A36; overflow: hidden;">
   <style>
     @keyframes plane-fly {
-      0% { opacity: 0; transform: translate(-50vw, 0px) scale(0.5); }
-      20% { opacity: 1; transform: translate(-25vw, 0px) scale(1.5); }
-      80% { opacity: 1; transform: translate(25vw, 0px) scale(1.5); }
-      100% { opacity: 0; transform: translate(50vw, 0px) scale(0.5); }
+      0% { opacity: 0; transform: translate(-60vw, 0px) scale(1.2); }
+      10% { opacity: 1; transform: translate(-48vw, 0px) scale(1.2); }
+      90% { opacity: 1; transform: translate(48vw, 0px) scale(1.2); }
+      100% { opacity: 0; transform: translate(60vw, 0px) scale(1.2); }
     }
     @keyframes draw-path {
       0% { width: 0%; opacity: 0; }
-      15% { opacity: 1; }
-      85% { width: 80%; opacity: 1; }
+      10% { opacity: 1; }
+      90% { width: 100%; opacity: 1; }
       100% { opacity: 0; }
     }
     @keyframes flag-appear {
@@ -157,10 +157,10 @@
     }
     
     .anim-plane {
-      animation: plane-fly 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation: plane-fly 6s linear forwards;
     }
     .anim-path {
-      animation: draw-path 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation: draw-path 6s linear forwards;
     }
     .anim-flags-container {
       animation: slide-up-flags 1s cubic-bezier(0.4, 0, 0.2, 1) 4s forwards;
