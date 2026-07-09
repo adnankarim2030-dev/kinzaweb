@@ -127,10 +127,10 @@
 <div id="site-opener" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-deep-navy text-pure-white transition-all duration-1000 ease-in-out" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #001A36; overflow: hidden;">
   <style>
     @keyframes plane-fly {
-      0% { opacity: 0; transform: translate(-50vw, 50px) scale(0.5) rotate(20deg); }
-      15% { opacity: 1; transform: translate(-25vw, 20px) scale(0.8) rotate(10deg); }
-      85% { opacity: 1; transform: translate(25vw, -20px) scale(1) rotate(-5deg); }
-      100% { opacity: 0; transform: translate(50vw, -50px) scale(0.5) rotate(-15deg); }
+      0% { opacity: 0; transform: translate(-50vw, 0px) scale(0.5); }
+      20% { opacity: 1; transform: translate(-25vw, 0px) scale(1.5); }
+      80% { opacity: 1; transform: translate(25vw, 0px) scale(1.5); }
+      100% { opacity: 0; transform: translate(50vw, 0px) scale(0.5); }
     }
     @keyframes draw-path {
       0% { width: 0%; opacity: 0; }
@@ -150,30 +150,38 @@
       0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
       100% { opacity: 1; transform: translateY(0); filter: blur(0px) drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
     }
+    @keyframes text-reveal-glow-green {
+      0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+      10% { opacity: 1; filter: drop-shadow(0 0 30px rgba(52,211,153,1)); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0px) drop-shadow(0 0 15px rgba(52,211,153,0.6)); }
+    }
     
     .anim-plane {
-      animation: plane-fly 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation: plane-fly 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
     .anim-path {
-      animation: draw-path 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation: draw-path 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
     .anim-flags-container {
-      animation: slide-up-flags 1s cubic-bezier(0.4, 0, 0.2, 1) 2.5s forwards;
+      animation: slide-up-flags 1s cubic-bezier(0.4, 0, 0.2, 1) 4s forwards;
     }
     .anim-flag-ksa {
-      animation: flag-appear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 2.2s forwards;
+      animation: flag-appear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 3.6s forwards;
     }
     .anim-flag-pk {
-      animation: flag-appear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 2.6s forwards;
+      animation: flag-appear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 4s forwards;
     }
     .anim-text-1 {
-      animation: text-reveal-glow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 3.2s forwards;
+      animation: text-reveal-glow-green 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 4.6s forwards;
     }
     .anim-text-2 {
-      animation: text-reveal-glow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 3.8s forwards;
+      animation: text-reveal-glow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 5.2s forwards;
     }
     .anim-text-3 {
-      animation: text-reveal-glow 1s cubic-bezier(0.34, 1.56, 0.64, 1) 4.6s forwards;
+      animation: text-reveal-glow-green 1s cubic-bezier(0.34, 1.56, 0.64, 1) 5.8s forwards;
+    }
+    .anim-text-4 {
+      animation: text-reveal-glow 1s cubic-bezier(0.34, 1.56, 0.64, 1) 6.4s forwards;
     }
   </style>
 
@@ -187,10 +195,11 @@
       <div class="absolute h-[2px] border-t-2 border-dashed border-emerald-400/50 anim-path opacity-0" style="width: 0%;"></div>
       
       <!-- Airplane SVG -->
-      <div class="absolute anim-plane opacity-0 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] text-pure-white">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(45deg);">
+      <div class="absolute anim-plane opacity-0 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] text-pure-white flex items-center justify-center">
+        <svg width="100" height="100" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg);">
           <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2C10.67 2 10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z"/>
         </svg>
+        <span class="absolute text-[8px] font-bold text-deep-navy tracking-[0.3em] whitespace-nowrap z-10" style="transform: translateY(-2px);">SAUDIA</span>
       </div>
     </div>
   </div>
@@ -224,10 +233,11 @@
     </div>
 
     <!-- Text -->
-    <div class="text-center mt-2 px-4 max-w-3xl">
-      <h3 class="anim-text-1 opacity-0 text-lg sm:text-2xl font-light tracking-wide text-white/80 mb-3">From the Kingdom of Saudi Arabia...</h3>
-      <h2 class="anim-text-2 opacity-0 text-2xl sm:text-5xl font-extrabold tracking-tight text-white mb-8 leading-tight">Bringing the Refreshing Spirit to the <br/> <span class="text-emerald-400">Heart of Pakistan</span></h2>
-      <div class="anim-text-3 opacity-0">
+    <div class="text-center mt-4 px-4 max-w-4xl flex flex-col gap-2">
+      <h2 class="anim-text-1 opacity-0 text-3xl sm:text-6xl font-black tracking-tight text-emerald-400">From the Kingdom of Saudi Arabia...</h2>
+      <h3 class="anim-text-2 opacity-0 text-lg sm:text-2xl font-medium tracking-wide text-white/90">Bringing the Refreshing Spirit to the</h3>
+      <h2 class="anim-text-3 opacity-0 text-3xl sm:text-6xl font-black tracking-tight text-emerald-400 mb-6">Heart of Pakistan</h2>
+      <div class="anim-text-4 opacity-0">
         <img alt="Kinza Logo" class="h-16 sm:h-24 w-auto brightness-0 invert mx-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" src="images/kinza_logo_arabic.png"/>
       </div>
     </div>
