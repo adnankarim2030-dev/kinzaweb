@@ -1,6 +1,6 @@
 /**
- * Kinza Beverage - 100% GPU-Safe & High-Visibility Carbonated Soda Bubble Engine
- * Guaranteed to render crisply across all browsers, laptops, mobile devices, and display cards.
+ * Kinza Beverage - Bulletproof & High-Visibility Carbonated Soda Bubble Engine
+ * 100% Guaranteed DOM Safety, Zero Dependencies, High-Contrast Visibility
  */
 
 (function() {
@@ -14,21 +14,20 @@
     let burstRings = [];
     let burstTimerId = null;
 
-    const MAX_AMBIENT_BUBBLES = 40; // High clarity, clean density
-    const BURST_INTERVAL = 10000;   // Exactly every 10 seconds
+    const MAX_AMBIENT_BUBBLES = 45; // Rich, vivid soda carbonation density
+    const BURST_INTERVAL = 10000;   // Energetic burst every 10 seconds
 
     function init() {
+        if (!document.body) {
+            window.addEventListener('DOMContentLoaded', init);
+            return;
+        }
+
         if (document.getElementById('corner-fizz-canvas')) return;
 
         canvas = document.createElement('canvas');
         canvas.id = 'corner-fizz-canvas';
-        canvas.style.position = 'fixed';
-        canvas.style.top = '0';
-        canvas.style.left = '0';
-        canvas.style.width = '100vw';
-        canvas.style.height = '100vh';
-        canvas.style.pointerEvents = 'none';
-        canvas.style.zIndex = '99999';
+        canvas.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;pointer-events:none;z-index:999999;';
         document.body.appendChild(canvas);
 
         ctx = canvas.getContext('2d');
@@ -36,7 +35,7 @@
         resize();
         window.addEventListener('resize', resize);
 
-        // Seed initial ambient bubbles distributed vertically
+        // Seed initial ambient bubbles distributed vertically across the viewport
         for (let i = 0; i < MAX_AMBIENT_BUBBLES; i++) {
             const b = createAmbientBubble(true);
             ambientBubbles.push(b);
@@ -49,34 +48,35 @@
         burstTimerId = setInterval(triggerBurst, BURST_INTERVAL);
 
         requestAnimationFrame(render);
+        console.log('🫧 Kinza Soda Carbonation Bubble Engine Active');
     }
 
     function resize() {
         if (!canvas) return;
-        width = canvas.width = Math.max(320, window.innerWidth);
-        height = canvas.height = Math.max(400, window.innerHeight);
+        width = canvas.width = window.innerWidth || document.documentElement.clientWidth || 1024;
+        height = canvas.height = window.innerHeight || document.documentElement.clientHeight || 768;
     }
 
     function createAmbientBubble(randomY = false) {
-        // Prominent bubble sizes (9px to 24px)
-        const radius = 9 + Math.random() * 15;
+        // Prominent size (10px to 26px)
+        const radius = 10 + Math.random() * 16;
         const speed = 1.4 + Math.random() * 2.4;
         return {
             x: Math.random() * width,
-            y: randomY ? Math.random() * height : height + 20 + Math.random() * 50,
-            vx: (Math.random() - 0.5) * 0.6,
+            y: randomY ? Math.random() * height : height + 20 + Math.random() * 60,
+            vx: (Math.random() - 0.5) * 0.7,
             vy: -speed,
             radius: radius,
             wobblePhase: Math.random() * Math.PI * 2,
-            wobbleSpeed: 0.02 + Math.random() * 0.03,
-            wobbleAmp: 0.5 + Math.random() * 1.0,
-            alpha: 0.8 + Math.random() * 0.2,
+            wobbleSpeed: 0.025 + Math.random() * 0.035,
+            wobbleAmp: 0.6 + Math.random() * 1.2,
+            alpha: 0.85 + Math.random() * 0.15,
             targetTopY: 30 + Math.random() * 120
         };
     }
 
     function triggerBurst() {
-        const count = 25 + Math.floor(Math.random() * 10);
+        const count = 28 + Math.floor(Math.random() * 10);
         const centerMinX = width * 0.2;
         const centerMaxX = width * 0.8;
 
@@ -85,7 +85,7 @@
             const startY = height + 20 + Math.random() * 100;
             const targetTopY = 40 + Math.random() * 100;
             const initialSpeedY = 7.0 + Math.random() * 4.0;
-            const lateralDrift = (Math.random() - 0.5) * 0.9;
+            const lateralDrift = (Math.random() - 0.5) * 1.0;
 
             burstBubbles.push({
                 x: startX,
@@ -94,11 +94,11 @@
                 vy: -initialSpeedY,
                 baseDrag: 0.998,
                 topDrag: 0.92 + Math.random() * 0.03,
-                radius: 11 + Math.random() * 16,
+                radius: 12 + Math.random() * 18,
                 wobblePhase: Math.random() * Math.PI * 2,
-                wobbleSpeed: 0.03 + Math.random() * 0.04,
-                wobbleAmp: 0.7 + Math.random() * 1.2,
-                alpha: 0.85 + Math.random() * 0.15,
+                wobbleSpeed: 0.035 + Math.random() * 0.045,
+                wobbleAmp: 0.8 + Math.random() * 1.4,
+                alpha: 0.9 + Math.random() * 0.1,
                 targetTopY: targetTopY
             });
         }
@@ -108,13 +108,13 @@
         const dropletCount = 8 + Math.floor(radius * 0.6);
         for (let i = 0; i < dropletCount; i++) {
             const angle = (Math.PI * 2 / dropletCount) * i + (Math.random() - 0.5) * 0.8;
-            const speed = 1.8 + Math.random() * 3.0;
+            const speed = 1.8 + Math.random() * 3.2;
             popEffects.push({
                 x: x,
                 y: y,
                 vx: Math.cos(angle) * speed,
                 vy: Math.sin(angle) * speed,
-                radius: Math.max(2.0, radius * 0.2 + Math.random() * 2),
+                radius: Math.max(2.2, radius * 0.22 + Math.random() * 2),
                 alpha: 0.95,
                 decay: 0.025 + Math.random() * 0.025,
                 gravity: 0.05
@@ -134,35 +134,36 @@
 
     function drawBubble(b) {
         ctx.save();
+        ctx.globalAlpha = b.alpha;
 
-        // 1. Semi-transparent Soda Water Base Fill
-        ctx.fillStyle = `rgba(224, 242, 254, ${b.alpha * 0.6})`;
+        // 1. Solid Soda Aqua Base Circle (100% High Visibility!)
+        ctx.fillStyle = 'rgba(186, 230, 253, 0.45)';
         ctx.beginPath();
         ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // 2. 3D Radial Volume Highlight
+        // 2. 3D Soda Volume Gradient
         const radGrad = ctx.createRadialGradient(
-            b.x - b.radius * 0.3,
-            b.y - b.radius * 0.3,
-            1,
+            b.x - b.radius * 0.35,
+            b.y - b.radius * 0.35,
+            b.radius * 0.05,
             b.x,
             b.y,
             b.radius
         );
-        radGrad.addColorStop(0, `rgba(255, 255, 255, ${b.alpha * 0.95})`);
-        radGrad.addColorStop(0.45, `rgba(56, 189, 248, ${b.alpha * 0.45})`);
-        radGrad.addColorStop(0.85, `rgba(14, 165, 233, ${b.alpha * 0.65})`);
-        radGrad.addColorStop(1, `rgba(2, 132, 199, ${b.alpha * 0.8})`);
+        radGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+        radGrad.addColorStop(0.35, 'rgba(186, 230, 253, 0.6)');
+        radGrad.addColorStop(0.75, 'rgba(56, 189, 248, 0.4)');
+        radGrad.addColorStop(1, 'rgba(14, 165, 233, 0.7)');
 
         ctx.fillStyle = radGrad;
         ctx.beginPath();
         ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // 3. Crisp Dark Cyan Rim Contour (100% High Contrast on White & Light Backgrounds!)
-        ctx.strokeStyle = `rgba(14, 116, 144, ${Math.min(1.0, b.alpha * 0.95)})`;
-        ctx.lineWidth = Math.max(1.8, b.radius * 0.15);
+        // 3. Crisp Bold Dark Cyan Rim (Very High Contrast Outline!)
+        ctx.strokeStyle = '#0284c7';
+        ctx.lineWidth = Math.max(2.0, b.radius * 0.14);
         ctx.stroke();
 
         // 4. Pure White 3D Specular Glare Arc (Top-Left Highlight)
@@ -174,8 +175,8 @@
             Math.PI * 1.0,
             Math.PI * 1.65
         );
-        ctx.strokeStyle = `rgba(255, 255, 255, 0.98)`;
-        ctx.lineWidth = Math.max(2, b.radius * 0.22);
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = Math.max(2.2, b.radius * 0.22);
         ctx.stroke();
 
         ctx.restore();
@@ -243,9 +244,10 @@
             }
 
             ctx.save();
+            ctx.globalAlpha = ring.alpha;
             ctx.beginPath();
             ctx.arc(ring.x, ring.y, ring.radius, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${ring.alpha * 0.9})`;
+            ctx.strokeStyle = '#0284c7';
             ctx.lineWidth = ring.lineWidth;
             ctx.stroke();
             ctx.restore();
@@ -265,7 +267,8 @@
             }
 
             ctx.save();
-            ctx.fillStyle = `rgba(56, 189, 248, ${pop.alpha * 0.9})`;
+            ctx.globalAlpha = pop.alpha;
+            ctx.fillStyle = '#0284c7';
             ctx.beginPath();
             ctx.arc(pop.x, pop.y, pop.radius, 0, Math.PI * 2);
             ctx.fill();
@@ -275,9 +278,10 @@
         requestAnimationFrame(render);
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
         init();
+    } else {
+        document.addEventListener('DOMContentLoaded', init);
+        window.addEventListener('load', init);
     }
 })();
