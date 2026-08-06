@@ -1,6 +1,6 @@
 /**
- * Kinza Beverage - Vivid & Highly Visible Soda Carbonation Bubble Engine
- * Ensures 100% visibility across all screens, devices, and backgrounds.
+ * Kinza Beverage - 100% GPU-Safe & High-Visibility Carbonated Soda Bubble Engine
+ * Guaranteed to render crisply across all browsers, laptops, mobile devices, and display cards.
  */
 
 (function() {
@@ -14,7 +14,7 @@
     let burstRings = [];
     let burstTimerId = null;
 
-    const MAX_AMBIENT_BUBBLES = 35; // Perfect balanced count
+    const MAX_AMBIENT_BUBBLES = 40; // High clarity, clean density
     const BURST_INTERVAL = 10000;   // Exactly every 10 seconds
 
     function init() {
@@ -36,7 +36,7 @@
         resize();
         window.addEventListener('resize', resize);
 
-        // Seed initial ambient bubbles distributed vertically across the full screen
+        // Seed initial ambient bubbles distributed vertically
         for (let i = 0; i < MAX_AMBIENT_BUBBLES; i++) {
             const b = createAmbientBubble(true);
             ambientBubbles.push(b);
@@ -58,9 +58,9 @@
     }
 
     function createAmbientBubble(randomY = false) {
-        // Larger, prominent bubble radius (8px to 22px)
-        const radius = 8 + Math.random() * 14;
-        const speed = 1.2 + Math.random() * 2.2;
+        // Prominent bubble sizes (9px to 24px)
+        const radius = 9 + Math.random() * 15;
+        const speed = 1.4 + Math.random() * 2.4;
         return {
             x: Math.random() * width,
             y: randomY ? Math.random() * height : height + 20 + Math.random() * 50,
@@ -70,13 +70,13 @@
             wobblePhase: Math.random() * Math.PI * 2,
             wobbleSpeed: 0.02 + Math.random() * 0.03,
             wobbleAmp: 0.5 + Math.random() * 1.0,
-            alpha: 0.75 + Math.random() * 0.25,
+            alpha: 0.8 + Math.random() * 0.2,
             targetTopY: 30 + Math.random() * 120
         };
     }
 
     function triggerBurst() {
-        const count = 22 + Math.floor(Math.random() * 10);
+        const count = 25 + Math.floor(Math.random() * 10);
         const centerMinX = width * 0.2;
         const centerMaxX = width * 0.8;
 
@@ -84,7 +84,7 @@
             const startX = centerMinX + Math.random() * (centerMaxX - centerMinX);
             const startY = height + 20 + Math.random() * 100;
             const targetTopY = 40 + Math.random() * 100;
-            const initialSpeedY = 6.5 + Math.random() * 4.0;
+            const initialSpeedY = 7.0 + Math.random() * 4.0;
             const lateralDrift = (Math.random() - 0.5) * 0.9;
 
             burstBubbles.push({
@@ -94,7 +94,7 @@
                 vy: -initialSpeedY,
                 baseDrag: 0.998,
                 topDrag: 0.92 + Math.random() * 0.03,
-                radius: 10 + Math.random() * 16,
+                radius: 11 + Math.random() * 16,
                 wobblePhase: Math.random() * Math.PI * 2,
                 wobbleSpeed: 0.03 + Math.random() * 0.04,
                 wobbleAmp: 0.7 + Math.random() * 1.2,
@@ -116,7 +116,7 @@
                 vy: Math.sin(angle) * speed,
                 radius: Math.max(2.0, radius * 0.2 + Math.random() * 2),
                 alpha: 0.95,
-                decay: 0.02 + Math.random() * 0.02,
+                decay: 0.025 + Math.random() * 0.025,
                 gravity: 0.05
             });
         }
@@ -127,7 +127,7 @@
             radius: radius * 0.4,
             maxRadius: radius * 4.0,
             alpha: 0.85,
-            lineWidth: Math.max(1.8, radius * 0.22),
+            lineWidth: Math.max(2.0, radius * 0.22),
             expandSpeed: 2.2 + radius * 0.14
         });
     }
@@ -135,66 +135,48 @@
     function drawBubble(b) {
         ctx.save();
 
-        // 1. Soft Aqua Shadow Glow for 100% High Contrast on White & Light Backgrounds
-        ctx.shadowColor = `rgba(14, 165, 233, ${b.alpha * 0.6})`;
-        ctx.shadowBlur = Math.max(5, b.radius * 0.6);
+        // 1. Semi-transparent Soda Water Base Fill
+        ctx.fillStyle = `rgba(224, 242, 254, ${b.alpha * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+        ctx.fill();
 
-        // 2. 3D Soda Bubble Radial Volume
+        // 2. 3D Radial Volume Highlight
         const radGrad = ctx.createRadialGradient(
-            b.x - b.radius * 0.35,
-            b.y - b.radius * 0.35,
-            b.radius * 0.08,
+            b.x - b.radius * 0.3,
+            b.y - b.radius * 0.3,
+            1,
             b.x,
             b.y,
             b.radius
         );
-
         radGrad.addColorStop(0, `rgba(255, 255, 255, ${b.alpha * 0.95})`);
-        radGrad.addColorStop(0.25, `rgba(224, 242, 254, ${b.alpha * 0.7})`);
-        radGrad.addColorStop(0.65, `rgba(56, 189, 248, ${b.alpha * 0.35})`);
-        radGrad.addColorStop(0.88, `rgba(14, 165, 233, ${b.alpha * 0.55})`);
-        radGrad.addColorStop(1, `rgba(2, 132, 199, ${b.alpha * 0.75})`);
+        radGrad.addColorStop(0.45, `rgba(56, 189, 248, ${b.alpha * 0.45})`);
+        radGrad.addColorStop(0.85, `rgba(14, 165, 233, ${b.alpha * 0.65})`);
+        radGrad.addColorStop(1, `rgba(2, 132, 199, ${b.alpha * 0.8})`);
 
         ctx.fillStyle = radGrad;
         ctx.beginPath();
         ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.shadowColor = 'transparent';
-        ctx.shadowBlur = 0;
-
-        // 3. Sharp Outer Dark Cyan Rim (Very Crisp & Clear Border!)
-        ctx.strokeStyle = `rgba(14, 116, 144, ${b.alpha * 0.85})`;
-        ctx.lineWidth = Math.max(1.5, b.radius * 0.12);
+        // 3. Crisp Dark Cyan Rim Contour (100% High Contrast on White & Light Backgrounds!)
+        ctx.strokeStyle = `rgba(14, 116, 144, ${Math.min(1.0, b.alpha * 0.95)})`;
+        ctx.lineWidth = Math.max(1.8, b.radius * 0.15);
         ctx.stroke();
 
-        // 4. Pure White Specular Glare Arc (Top-Left 3D Reflection)
+        // 4. Pure White 3D Specular Glare Arc (Top-Left Highlight)
         ctx.beginPath();
         ctx.arc(
-            b.x - b.radius * 0.28,
-            b.y - b.radius * 0.28,
+            b.x - b.radius * 0.25,
+            b.y - b.radius * 0.25,
             b.radius * 0.55,
-            Math.PI * 1.1,
+            Math.PI * 1.0,
             Math.PI * 1.65
         );
-        ctx.strokeStyle = `rgba(255, 255, 255, ${b.alpha})`;
-        ctx.lineWidth = Math.max(1.5, b.radius * 0.22);
+        ctx.strokeStyle = `rgba(255, 255, 255, 0.98)`;
+        ctx.lineWidth = Math.max(2, b.radius * 0.22);
         ctx.stroke();
-
-        // 5. Bottom-Right Crescent Refraction
-        if (b.radius > 6) {
-            ctx.beginPath();
-            ctx.arc(
-                b.x + b.radius * 0.2,
-                b.y + b.radius * 0.2,
-                b.radius * 0.62,
-                Math.PI * 0.1,
-                Math.PI * 0.55
-            );
-            ctx.strokeStyle = `rgba(56, 189, 248, ${b.alpha * 0.75})`;
-            ctx.lineWidth = Math.max(1.2, b.radius * 0.14);
-            ctx.stroke();
-        }
 
         ctx.restore();
     }
@@ -263,7 +245,7 @@
             ctx.save();
             ctx.beginPath();
             ctx.arc(ring.x, ring.y, ring.radius, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${ring.alpha * 0.85})`;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${ring.alpha * 0.9})`;
             ctx.lineWidth = ring.lineWidth;
             ctx.stroke();
             ctx.restore();
