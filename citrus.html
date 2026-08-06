@@ -15,8 +15,11 @@
             50% { transform: translateY(-15px) rotate(2deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
+        #product-display-img {
+            mix-blend-mode: multiply;
+        }
         .animate-float {
-            animation: float 5s ease-in-out infinite;
+            animation: none !important;
         }
         @keyframes flag-shine {
             0% { left: -100%; }
@@ -97,14 +100,14 @@
       animation: slide-in-right 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards, shine-sweep 3s linear infinite 0.5s;
     }
     .text-shine-orange {
-      background: linear-gradient(to right, #F39200 20%, #FFFFFF 40%, #FFFFFF 60%, #F39200 80%);
+      background: linear-gradient(to right, #8CBF1C 20%, #A3E028 40%, #A3E028 60%, #6FA010 80%);
       background-size: 200% auto;
       color: transparent;
       -webkit-background-clip: text;
       background-clip: text;
     }
     .text-shine-white {
-      background: linear-gradient(to right, #FFFFFF 20%, #F39200 40%, #F39200 60%, #FFFFFF 80%);
+      background: linear-gradient(to right, #FFFFFF 20%, #8CBF1C 40%, #8CBF1C 60%, #FFFFFF 80%);
       background-size: 200% auto;
       color: transparent;
       -webkit-background-clip: text;
@@ -199,10 +202,10 @@
             <!-- Product Showroom Card -->
             <div class="relative bg-white rounded-[2.5rem] border border-slate-100 shadow-xl p-8 overflow-hidden flex flex-col items-center justify-center min-h-[450px]">
                 <!-- Glow backdrop -->
-                <div class="absolute w-72 h-72 rounded-full blur-3xl pointer-events-none scale-90 transition-transform duration-700" style="background-color: rgba(0, 139, 71, 0.4); top: 15%; left: 15%;"></div>
+                <div class="absolute w-72 h-72 rounded-full blur-3xl pointer-events-none scale-90 transition-transform duration-700" style="background-color: rgba(140, 191, 28, 0.35); top: 15%; left: 15%;"></div>
                 
                 <!-- Floating Can Image -->
-                <img id="product-display-img" src="images/img_11.png" alt="Kinza Citrus" class="h-80 w-auto object-contain z-10 animate-float drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)]"/>
+                <img id="product-display-img" src="images/citrus_can (2).png" alt="Kinza Citrus" class="h-80 w-auto object-contain z-10 animate-float drop-shadow-[0_20px_30px_rgba(111,160,16,0.25)]"/>
                 
                 <!-- Badges -->
                 <div class="flex flex-wrap justify-center gap-2 mt-8 z-10">
@@ -246,7 +249,7 @@
         <div class="lg:col-span-7 flex flex-col gap-8">
             <!-- Details Header Card -->
             <div class="bg-white rounded-[2rem] border border-slate-100 shadow-lg p-8">
-                <span class="text-xs font-bold uppercase tracking-widest" style="color: #008B47;">LEMON LIME SPARKLER</span>
+                <span class="text-xs font-bold uppercase tracking-widest" style="color: #8CBF1C;">LEMON LIME SPARKLER</span>
                 <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-primary mt-2 mb-4">Kinza Citrus</h1>
                 <p class="text-slate-600 text-lg leading-relaxed mb-6">Zesty lemon and lime flavors meet sparkling bubbles in Kinza Citrus. It's a crisp, mouth-watering explosion of freshness designed to beat the heat and keep you feeling active.</p>
                 <div class="flex items-center gap-4 py-4 border-t border-slate-100">
@@ -263,7 +266,7 @@
 
             <!-- Order / Inquiry Form Card -->
             <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl p-8 relative overflow-hidden" id="order-form-card">
-                <div class="absolute top-0 left-0 w-full h-1.5" style="background-color: #008B47;"></div>
+                <div class="absolute top-0 left-0 w-full h-1.5" style="background: linear-gradient(90deg, #A3E028, #8CBF1C, #6FA010);"></div>
                 <h2 class="text-2xl font-extrabold text-slate-800 mb-2">Wholesale Inquiry & Order Form</h2>
                 <p class="text-slate-500 text-sm mb-6">Fill in the details below to request a wholesale quotation or place a bulk order. No pricing details are required upfront.</p>
                 
@@ -348,7 +351,7 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" id="submit-btn" class="w-full text-pure-white font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg flag-shine-anim relative overflow-hidden" style="background-color: #008B47; shadow-color: rgba(0, 139, 71, 0.4);">
+                    <button type="submit" id="submit-btn" class="w-full text-pure-white font-extrabold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg flag-shine-anim relative overflow-hidden" style="background: linear-gradient(135deg, #A3E028 0%, #8CBF1C 50%, #6FA010 100%); box-shadow: 0 10px 25px -5px rgba(111, 160, 16, 0.5);">
                         <span class="material-symbols-outlined">send</span>
                         <span>Submit Wholesale Inquiry</span>
                     </button>
@@ -371,11 +374,11 @@
             </div>
             <p class="text-surface-variant/70 text-sm leading-relaxed mb-6">100% local, premium beverages crafted to deliver refreshing bubble zest in every sip. Proudly Pakistan.</p>
 <div class="flex items-center gap-4 mt-4">
-    <a href="https://www.facebook.com/KinzaPakistan" target="_blank" rel="noopener noreferrer" class="group relative hover:-translate-y-0.5 transition-transform" aria-label="Facebook">
+    <a href="https://www.facebook.com/kinzabev.pakistan" target="_blank" rel="noopener noreferrer" class="group relative hover:-translate-y-0.5 transition-transform" aria-label="Facebook">
         <div class="absolute inset-0 bg-blue-500 rounded-full blur opacity-0 group-hover:opacity-80 transition-opacity duration-300"></div>
         <svg class="w-6 h-6 relative text-surface-variant/80 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
     </a>
-    <a href="https://www.instagram.com/kinzapakistan/" target="_blank" rel="noopener noreferrer" class="group relative hover:-translate-y-0.5 transition-transform" aria-label="Instagram">
+    <a href="https://www.instagram.com/kinzabev.pakistan/" target="_blank" rel="noopener noreferrer" class="group relative hover:-translate-y-0.5 transition-transform" aria-label="Instagram">
         <div class="absolute inset-0 bg-pink-500 rounded-full blur opacity-0 group-hover:opacity-80 transition-opacity duration-300"></div>
         <svg class="w-6 h-6 relative text-surface-variant/80 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
     </a>
@@ -696,5 +699,7 @@
     <img src="images/whatsapp_icon.png" alt="WhatsApp" class="w-14 h-14 md:w-16 md:h-16 object-contain drop-shadow-2xl" />
 </a>
 
+<!-- Center Water Bubble Burst Effect (Immediate Start & Every 5 Seconds) -->
+<script src="corner-fizz.js" defer></script>
 </body>
 </html>
