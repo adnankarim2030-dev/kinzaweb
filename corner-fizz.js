@@ -1,9 +1,6 @@
 /**
- * Kinza Beverage - Continuous Fizzy Soda & Water Bubble Engine
- * Features:
- * 1. Continuous Ambient Soda Fizz: Crystal-clear carbonation bubbles float up steadily across the screen at all times.
- * 2. Periodic Energetic Water Bursts: Fast rising bubble clusters shoot up from bottom to top every 7 seconds and pop with splash droplets.
- * 3. Immediate Startup & High Performance: Canvas scales smoothly on resize, low overhead.
+ * Kinza Beverage - High-Visibility Fizzy Soda & Water Bubble Engine
+ * Optimized for both Light (White) & Dark Backgrounds
  */
 
 (function() {
@@ -17,8 +14,8 @@
     let burstRings = [];
     let burstTimerId = null;
 
-    const MAX_AMBIENT_BUBBLES = 75; // Continuous ambient soda fizz density
-    const BURST_INTERVAL = 7000;    // Periodic energetic burst every 7s
+    const MAX_AMBIENT_BUBBLES = 80; // High density ambient soda fizz
+    const BURST_INTERVAL = 6000;    // Energetic burst every 6s
 
     function init() {
         if (document.getElementById('corner-fizz-canvas')) return;
@@ -61,33 +58,33 @@
     }
 
     function createAmbientBubble(randomY = false) {
-        const radius = 2.5 + Math.random() * 12;
-        const speed = 1.2 + Math.random() * 2.8;
+        const radius = 3.5 + Math.random() * 14;
+        const speed = 1.4 + Math.random() * 3.0;
         return {
             x: Math.random() * width,
-            y: randomY ? Math.random() * height : height + 10 + Math.random() * 40,
-            vx: (Math.random() - 0.5) * 0.6,
+            y: randomY ? Math.random() * height : height + 15 + Math.random() * 40,
+            vx: (Math.random() - 0.5) * 0.7,
             vy: -speed,
             radius: radius,
             wobblePhase: Math.random() * Math.PI * 2,
-            wobbleSpeed: 0.02 + Math.random() * 0.03,
-            wobbleAmp: 0.4 + Math.random() * 0.8,
-            alpha: 0.4 + Math.random() * 0.45,
-            targetTopY: 30 + Math.random() * 120
+            wobbleSpeed: 0.025 + Math.random() * 0.035,
+            wobbleAmp: 0.5 + Math.random() * 1.0,
+            alpha: 0.65 + Math.random() * 0.35,
+            targetTopY: 20 + Math.random() * 120
         };
     }
 
     function triggerBurst() {
-        const count = 30 + Math.floor(Math.random() * 15);
-        const centerMinX = width * 0.2;
-        const centerMaxX = width * 0.8;
+        const count = 35 + Math.floor(Math.random() * 15);
+        const centerMinX = width * 0.15;
+        const centerMaxX = width * 0.85;
 
         for (let i = 0; i < count; i++) {
             const startX = centerMinX + Math.random() * (centerMaxX - centerMinX);
-            const startY = height + 10 + Math.random() * 100;
-            const targetTopY = 40 + Math.random() * 90;
-            const initialSpeedY = 6.5 + Math.random() * 4.5;
-            const lateralDrift = (Math.random() - 0.5) * 0.9;
+            const startY = height + 15 + Math.random() * 120;
+            const targetTopY = 30 + Math.random() * 100;
+            const initialSpeedY = 7.0 + Math.random() * 4.5;
+            const lateralDrift = (Math.random() - 0.5) * 1.0;
 
             burstBubbles.push({
                 x: startX,
@@ -95,31 +92,31 @@
                 vx: lateralDrift,
                 vy: -initialSpeedY,
                 baseDrag: 0.998,
-                topDrag: 0.93 + Math.random() * 0.03,
-                radius: 4 + Math.random() * 16,
+                topDrag: 0.92 + Math.random() * 0.03,
+                radius: 5 + Math.random() * 18,
                 wobblePhase: Math.random() * Math.PI * 2,
-                wobbleSpeed: 0.03 + Math.random() * 0.04,
-                wobbleAmp: 0.6 + Math.random() * 1.2,
-                alpha: 0.75 + Math.random() * 0.25,
+                wobbleSpeed: 0.035 + Math.random() * 0.045,
+                wobbleAmp: 0.7 + Math.random() * 1.3,
+                alpha: 0.8 + Math.random() * 0.2,
                 targetTopY: targetTopY
             });
         }
     }
 
     function spawnPopEffect(x, y, radius) {
-        const dropletCount = 8 + Math.floor(radius * 0.7);
+        const dropletCount = 10 + Math.floor(radius * 0.8);
         for (let i = 0; i < dropletCount; i++) {
             const angle = (Math.PI * 2 / dropletCount) * i + (Math.random() - 0.5) * 0.8;
-            const speed = 1.5 + Math.random() * 2.8;
+            const speed = 1.8 + Math.random() * 3.2;
             popEffects.push({
                 x: x,
                 y: y,
                 vx: Math.cos(angle) * speed,
                 vy: Math.sin(angle) * speed,
-                radius: Math.max(1.2, radius * 0.15 + Math.random() * 2),
+                radius: Math.max(1.5, radius * 0.18 + Math.random() * 2.2),
                 alpha: 1.0,
                 decay: 0.02 + Math.random() * 0.02,
-                gravity: 0.04
+                gravity: 0.05
             });
         }
 
@@ -127,10 +124,10 @@
             x: x,
             y: y,
             radius: radius * 0.4,
-            maxRadius: radius * 4.0,
-            alpha: 0.85,
-            lineWidth: Math.max(1.5, radius * 0.2),
-            expandSpeed: 2.2 + radius * 0.12
+            maxRadius: radius * 4.2,
+            alpha: 0.9,
+            lineWidth: Math.max(1.8, radius * 0.22),
+            expandSpeed: 2.4 + radius * 0.14
         });
 
         popEffects.push({
@@ -138,9 +135,9 @@
             y: y,
             vx: 0,
             vy: 0,
-            radius: radius * 1.2,
-            alpha: 0.65,
-            decay: 0.07,
+            radius: radius * 1.3,
+            alpha: 0.75,
+            decay: 0.06,
             gravity: 0,
             isFlash: true
         });
@@ -149,6 +146,11 @@
     function drawBubble(b) {
         ctx.save();
 
+        // Soft cyan-blue glow shadow so bubble pops out on pure white backgrounds
+        ctx.shadowColor = `rgba(14, 165, 233, ${b.alpha * 0.45})`;
+        ctx.shadowBlur = Math.max(4, b.radius * 0.5);
+
+        // Radial Gradient for 3D Water & Soda Volume
         const radGrad = ctx.createRadialGradient(
             b.x - b.radius * 0.35,
             b.y - b.radius * 0.35,
@@ -158,24 +160,28 @@
             b.radius
         );
 
-        radGrad.addColorStop(0, `rgba(255, 255, 255, ${b.alpha * 0.9})`);
-        radGrad.addColorStop(0.25, `rgba(255, 255, 255, ${b.alpha * 0.2})`);
-        radGrad.addColorStop(0.7, `rgba(255, 255, 255, 0.03)`);
-        radGrad.addColorStop(0.9, `rgba(255, 255, 255, ${b.alpha * 0.3})`);
-        radGrad.addColorStop(1, `rgba(255, 255, 255, ${b.alpha * 0.5})`);
+        radGrad.addColorStop(0, `rgba(255, 255, 255, ${b.alpha * 0.95})`);
+        radGrad.addColorStop(0.2, `rgba(224, 242, 254, ${b.alpha * 0.4})`);
+        radGrad.addColorStop(0.65, `rgba(56, 189, 248, ${b.alpha * 0.12})`);
+        radGrad.addColorStop(0.85, `rgba(14, 165, 233, ${b.alpha * 0.3})`);
+        radGrad.addColorStop(1, `rgba(2, 132, 199, ${b.alpha * 0.55})`);
 
         ctx.fillStyle = radGrad;
         ctx.beginPath();
         ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Edge contour
-        ctx.strokeStyle = `rgba(255, 255, 255, ${b.alpha * 0.5})`;
-        ctx.lineWidth = Math.max(0.75, b.radius * 0.08);
+        // Reset shadow for crisp stroke drawing
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+
+        // Outer Dark Cyan/Blue Refraction Contour (Visible on White!)
+        ctx.strokeStyle = `rgba(14, 116, 144, ${b.alpha * 0.55})`;
+        ctx.lineWidth = Math.max(1, b.radius * 0.09);
         ctx.stroke();
 
-        // Specular glare arc (top-left)
-        if (b.radius > 3) {
+        // Inner White Specular Glare Arc (Top-Left 3D Highlight)
+        if (b.radius > 2.5) {
             ctx.beginPath();
             ctx.arc(
                 b.x - b.radius * 0.28,
@@ -184,8 +190,23 @@
                 Math.PI * 1.1,
                 Math.PI * 1.65
             );
-            ctx.strokeStyle = `rgba(255, 255, 255, ${b.alpha * 0.95})`;
-            ctx.lineWidth = Math.max(1, b.radius * 0.18);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${b.alpha * 0.98})`;
+            ctx.lineWidth = Math.max(1.2, b.radius * 0.2);
+            ctx.stroke();
+        }
+
+        // Bottom-Right Crescent Refraction
+        if (b.radius > 5) {
+            ctx.beginPath();
+            ctx.arc(
+                b.x + b.radius * 0.2,
+                b.y + b.radius * 0.2,
+                b.radius * 0.62,
+                Math.PI * 0.1,
+                Math.PI * 0.55
+            );
+            ctx.strokeStyle = `rgba(56, 189, 248, ${b.alpha * 0.5})`;
+            ctx.lineWidth = Math.max(0.9, b.radius * 0.11);
             ctx.stroke();
         }
 
@@ -203,11 +224,11 @@
             b.y += b.vy;
 
             b.wobblePhase += b.wobbleSpeed;
-            b.x += Math.sin(b.wobblePhase) * b.wobbleAmp * 0.05;
+            b.x += Math.sin(b.wobblePhase) * b.wobbleAmp * 0.06;
 
             // Reset if out of top or bounds
-            if (b.y <= b.targetTopY || b.y <= -20) {
-                if (Math.random() < 0.3) {
+            if (b.y <= b.targetTopY || b.y <= -25) {
+                if (Math.random() < 0.35) {
                     spawnPopEffect(b.x, b.y, b.radius);
                 }
                 ambientBubbles[i] = createAmbientBubble(false);
@@ -232,7 +253,7 @@
             }
 
             b.wobblePhase += b.wobbleSpeed;
-            b.x += Math.sin(b.wobblePhase) * b.wobbleAmp * 0.05;
+            b.x += Math.sin(b.wobblePhase) * b.wobbleAmp * 0.06;
 
             if (b.y <= b.targetTopY || Math.abs(b.vy) < 0.15 || b.y <= 25) {
                 spawnPopEffect(b.x, b.y, b.radius);
@@ -257,7 +278,7 @@
             ctx.save();
             ctx.beginPath();
             ctx.arc(ring.x, ring.y, ring.radius, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${ring.alpha})`;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${ring.alpha * 0.8})`;
             ctx.lineWidth = ring.lineWidth;
             ctx.stroke();
             ctx.restore();
@@ -282,15 +303,15 @@
                     pop.x, pop.y, 0,
                     pop.x, pop.y, pop.radius
                 );
-                flashGrad.addColorStop(0, `rgba(255, 255, 255, ${pop.alpha * 0.85})`);
-                flashGrad.addColorStop(0.5, `rgba(255, 255, 255, ${pop.alpha * 0.25})`);
-                flashGrad.addColorStop(1, `rgba(255, 255, 255, 0)`);
+                flashGrad.addColorStop(0, `rgba(255, 255, 255, ${pop.alpha * 0.95})`);
+                flashGrad.addColorStop(0.5, `rgba(56, 189, 248, ${pop.alpha * 0.4})`);
+                flashGrad.addColorStop(1, `rgba(14, 165, 233, 0)`);
                 ctx.fillStyle = flashGrad;
                 ctx.beginPath();
                 ctx.arc(pop.x, pop.y, pop.radius, 0, Math.PI * 2);
                 ctx.fill();
             } else {
-                ctx.fillStyle = `rgba(255, 255, 255, ${pop.alpha * 0.85})`;
+                ctx.fillStyle = `rgba(56, 189, 248, ${pop.alpha * 0.85})`;
                 ctx.beginPath();
                 ctx.arc(pop.x, pop.y, pop.radius, 0, Math.PI * 2);
                 ctx.fill();
