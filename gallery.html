@@ -151,6 +151,54 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+    
+        /* 3D Movement Marquee & Card Effects */
+        .movement-3d-stage {
+            perspective: 1200px;
+            perspective-origin: center center;
+        }
+        .movement-3d-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            will-change: transform;
+            animation: kinzaScroll3D 45s linear infinite;
+            transform-style: preserve-3d;
+        }
+        .movement-3d-track:hover,
+        .movement-3d-track.is-paused {
+            animation-play-state: paused !important;
+        }
+        @keyframes kinzaScroll3D {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                transform: translate3d(-50%, 0, 0);
+            }
+        }
+        .movement-card-3d {
+            width: 280px;
+            height: 350px;
+            flex-shrink: 0;
+            border-radius: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 32px -8px rgba(20, 53, 136, 0.16), 0 4px 12px rgba(0, 0, 0, 0.04);
+            transform: perspective(1000px) rotateY(0deg) translateZ(0);
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.45s;
+            cursor: pointer;
+            user-select: none;
+        }
+        .movement-card-3d:hover {
+            transform: perspective(1000px) translateY(-10px) rotateX(4deg) rotateY(-3deg) scale(1.04);
+            box-shadow: 0 28px 48px -10px rgba(20, 53, 136, 0.32), 0 0 25px rgba(243, 146, 0, 0.25);
+            border-color: rgba(243, 146, 0, 0.6);
+            z-index: 30;
+        }
+
     /* Leaflet Custom Marker & Popup Styles */
         .kinza-pin-wrap {
             position: relative;
@@ -409,31 +457,723 @@ Live the <span class="text-orange-burst">Kinza</span> Vibe in Pakistan
 </div>
 </div>
 </section>
-<!-- Social Grid Section -->
-<section class="py-20 mt-20 relative">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-12">
-<h2 class="font-headline-lg text-headline-lg text-deep-navy mb-2">Join the Movement</h2>
-<p class="text-on-surface-variant">Follow us <span class="font-bold text-primary">@KinzaPakistan</span> for daily refreshment</p>
-</div>
-<div class="flex overflow-x-auto gap-4 pb-8 px-margin-mobile no-scrollbar md:justify-center">
-<!-- Social Card 1 -->
-<div class="flex-shrink-0 w-64 aspect-square rounded-2xl overflow-hidden glass-card shadow-lg hover:rotate-2 transition-transform duration-300">
-<img class="w-full h-full object-cover" data-alt="Instagram style post featuring a Kinza Cola can in a minimalist kitchen setting. Soft morning light through a window creates a peaceful, high-end atmosphere. The blue of the can is the focal point in an otherwise neutral, clean room." src="images/img_20.png"/>
-</div>
-<!-- Social Card 2 -->
-<div class="flex-shrink-0 w-64 aspect-square rounded-2xl overflow-hidden glass-card shadow-lg hover:-rotate-2 transition-transform duration-300">
-<img class="w-full h-full object-cover" data-alt="Instagram style creative flat-lay of Kinza cans arranged geometrically with fresh fruits like lemons and oranges. The composition is artistic and clean, with high-key lighting that reflects the refreshing taste profile." src="images/img_21.png"/>
-</div>
-<!-- Social Card 3 -->
-<div class="flex-shrink-0 w-64 aspect-square rounded-2xl overflow-hidden glass-card shadow-lg hover:rotate-2 transition-transform duration-300">
-<img class="w-full h-full object-cover" data-alt="Instagram style post of a refreshing Kinza Citrus can sitting on a beach in Khobar. The turquoise sea and golden sand provide a beautiful backdrop. The product looks cold and ready to drink, capturing a perfect vacation moment." src="images/img_22.png"/>
-</div>
-<!-- Social Card 4 -->
-<div class="flex-shrink-0 w-64 aspect-square rounded-2xl overflow-hidden glass-card shadow-lg hover:-rotate-2 transition-transform duration-300">
-<img class="w-full h-full object-cover" data-alt="Instagram style photo of a Kinza can held up against the Riyadh skyline at night. The city lights are blurred into beautiful bokeh, while the can is sharp and vibrant in the foreground, signifying urban lifestyle." src="images/img_23.png"/>
-</div>
-</div>
+<!-- Social Grid / 3D Movement Section -->
+<section class="py-24 my-10 relative overflow-hidden bg-gradient-to-b from-transparent via-[#143588]/[0.03] to-transparent" id="join-the-movement">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-8">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#143588]/10 border border-[#143588]/20 text-[#143588] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+      <span class="w-2 h-2 rounded-full bg-[#F39200] animate-pulse"></span>
+      Kinza Pakistan • Event Highlights
+    </div>
+    <h2 class="font-headline-lg text-headline-lg text-deep-navy mb-3">Join the Movement</h2>
+    <p class="text-on-surface-variant max-w-2xl mx-auto text-base">
+      Real moments from our tournaments, padel courts, and community activations across Pakistan. Follow us 
+      <a href="https://instagram.com/kinzapakistan" target="_blank" rel="noopener noreferrer" class="font-bold text-[#143588] hover:text-[#F39200] transition-colors underline decoration-[#F39200] decoration-2 underline-offset-4">@KinzaPakistan</a> for daily refreshment!
+    </p>
+
+    <!-- Interactive 3D Controls -->
+    <div class="flex items-center justify-center gap-3 mt-6">
+      <button id="move3dPrev" aria-label="Scroll Left" class="w-11 h-11 rounded-full bg-white border border-slate-200 text-[#143588] shadow-md hover:bg-[#143588] hover:text-white hover:border-[#143588] hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center focus:outline-none">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button id="move3dPlayPause" aria-label="Toggle Auto-Scroll" class="px-5 h-11 rounded-full bg-white border border-slate-200 text-[#143588] text-xs font-bold shadow-md hover:bg-[#143588] hover:text-white hover:border-[#143588] transition-all duration-200 flex items-center gap-2 focus:outline-none">
+        <svg id="playPauseIcon" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        <span id="playPauseText">Pause 3D Stream</span>
+      </button>
+      <button id="move3dNext" aria-label="Scroll Right" class="w-11 h-11 rounded-full bg-white border border-slate-200 text-[#143588] shadow-md hover:bg-[#143588] hover:text-white hover:border-[#143588] hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center focus:outline-none">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 3D Perspective Stage -->
+  <div class="relative w-full overflow-hidden movement-3d-stage py-6">
+    <!-- Left & Right Gradient Shadows for seamless floating infinity effect -->
+    <div class="pointer-events-none absolute left-0 top-0 bottom-0 w-12 md:w-28 bg-gradient-to-r from-[#FAF9F5] via-[#FAF9F5]/80 to-transparent z-20"></div>
+    <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-12 md:w-28 bg-gradient-to-l from-[#FAF9F5] via-[#FAF9F5]/80 to-transparent z-20"></div>
+
+    <!-- Scrolling Track Container -->
+    <div id="movement3DTrack" class="movement-3d-track flex gap-6 px-4">
+      
+    <div class="movement-card-3d group" onclick="openMovementModal(0)" data-idx="0" role="button" tabindex="0" aria-label="Kinza Court Activation">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_1.jpg" alt="Kinza Court Activation" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-blue-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🎾 Padel Arena
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Kinza Court Activation</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Official tournament court with Kinza courtside branding</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(1)" data-idx="1" role="button" tabindex="0" aria-label="Action Under the Lights">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_2.jpg" alt="Action Under the Lights" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-amber-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            ✨ Night Match
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Action Under the Lights</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Kinza glass court illuminated for championship matches</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(2)" data-idx="2" role="button" tabindex="0" aria-label="Smiles with Kinza">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_3.jpg" alt="Smiles with Kinza" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-[#143588]/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            💙 Kinza Gift Pack
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Smiles with Kinza</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Brand ambassador with signature blue Kinza presentation pack</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(3)" data-idx="3" role="button" tabindex="0" aria-label="Next Gen Champions">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_4.jpg" alt="Next Gen Champions" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-emerald-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🏆 APCCL Youth
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Next Gen Champions</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Young sports stars sporting custom Kinza tournament jerseys</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(4)" data-idx="4" role="button" tabindex="0" aria-label="Ice-Cold Refreshment">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_5.jpg" alt="Ice-Cold Refreshment" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-orange-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            ⚡ Flavors Lineup
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Ice-Cold Refreshment</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Kinza Lemon, Pomegranate & Citrus powering every game</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(5)" data-idx="5" role="button" tabindex="0" aria-label="Victory Celebration">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_6.jpg" alt="Victory Celebration" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-purple-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🌟 Player of the Match
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Victory Celebration</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Special edition Kinza box awarded to top performers</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(6)" data-idx="6" role="button" tabindex="0" aria-label="Double Refreshment">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_7.jpg" alt="Double Refreshment" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-pink-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🥤 Kinza Chill
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Double Refreshment</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Pomegranate & Cola — pure flavor after intense matches</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(7)" data-idx="7" role="button" tabindex="0" aria-label="The Kinza Community">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_8.jpg" alt="The Kinza Community" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-indigo-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🤝 Community Spirit
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">The Kinza Community</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Connecting athletes, fans, and creators across Pakistan</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(8)" data-idx="8" role="button" tabindex="0" aria-label="Premium Moments">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_9.jpg" alt="Premium Moments" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-amber-500/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🥇 Golden Taste
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Premium Moments</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Signature Kinza cans and luxury gift presentation packs</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(9)" data-idx="9" role="button" tabindex="0" aria-label="Ready for the Winners">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_10.jpg" alt="Ready for the Winners" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-[#143588]/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🎁 Event Stacks
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Ready for the Winners</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Iconic blue Kinza gift packs lined up for presentation</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(10)" data-idx="10" role="button" tabindex="0" aria-label="Grand Presentation">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_11.jpg" alt="Grand Presentation" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-red-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🏅 APCCL Season 2
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Grand Presentation</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Honoring tournament finalists with exclusive Kinza awards</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(11)" data-idx="11" role="button" tabindex="0" aria-label="Tournament Champion">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_12.jpg" alt="Tournament Champion" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-blue-700/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            👑 Championship Glory
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Tournament Champion</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Women's singles champion receiving official Kinza honors</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(0)" data-idx="0" role="button" tabindex="0" aria-label="Kinza Court Activation">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_1.jpg" alt="Kinza Court Activation" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-blue-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🎾 Padel Arena
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Kinza Court Activation</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Official tournament court with Kinza courtside branding</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(1)" data-idx="1" role="button" tabindex="0" aria-label="Action Under the Lights">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_2.jpg" alt="Action Under the Lights" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-amber-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            ✨ Night Match
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Action Under the Lights</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Kinza glass court illuminated for championship matches</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(2)" data-idx="2" role="button" tabindex="0" aria-label="Smiles with Kinza">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_3.jpg" alt="Smiles with Kinza" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-[#143588]/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            💙 Kinza Gift Pack
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Smiles with Kinza</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Brand ambassador with signature blue Kinza presentation pack</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(3)" data-idx="3" role="button" tabindex="0" aria-label="Next Gen Champions">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_4.jpg" alt="Next Gen Champions" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-emerald-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🏆 APCCL Youth
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Next Gen Champions</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Young sports stars sporting custom Kinza tournament jerseys</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(4)" data-idx="4" role="button" tabindex="0" aria-label="Ice-Cold Refreshment">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_5.jpg" alt="Ice-Cold Refreshment" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-orange-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            ⚡ Flavors Lineup
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Ice-Cold Refreshment</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Kinza Lemon, Pomegranate & Citrus powering every game</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(5)" data-idx="5" role="button" tabindex="0" aria-label="Victory Celebration">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_6.jpg" alt="Victory Celebration" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-purple-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🌟 Player of the Match
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Victory Celebration</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Special edition Kinza box awarded to top performers</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(6)" data-idx="6" role="button" tabindex="0" aria-label="Double Refreshment">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_7.jpg" alt="Double Refreshment" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-pink-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🥤 Kinza Chill
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Double Refreshment</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Pomegranate & Cola — pure flavor after intense matches</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(7)" data-idx="7" role="button" tabindex="0" aria-label="The Kinza Community">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_8.jpg" alt="The Kinza Community" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-indigo-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🤝 Community Spirit
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">The Kinza Community</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Connecting athletes, fans, and creators across Pakistan</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(8)" data-idx="8" role="button" tabindex="0" aria-label="Premium Moments">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_9.jpg" alt="Premium Moments" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-amber-500/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🥇 Golden Taste
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Premium Moments</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Signature Kinza cans and luxury gift presentation packs</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(9)" data-idx="9" role="button" tabindex="0" aria-label="Ready for the Winners">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_10.jpg" alt="Ready for the Winners" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-[#143588]/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🎁 Event Stacks
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Ready for the Winners</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Iconic blue Kinza gift packs lined up for presentation</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(10)" data-idx="10" role="button" tabindex="0" aria-label="Grand Presentation">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_11.jpg" alt="Grand Presentation" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-red-600/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            🏅 APCCL Season 2
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Grand Presentation</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Honoring tournament finalists with exclusive Kinza awards</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="movement-card-3d group" onclick="openMovementModal(11)" data-idx="11" role="button" tabindex="0" aria-label="Tournament Champion">
+      <div class="relative w-full h-full overflow-hidden bg-slate-900">
+        <img src="images/kinza_event_12.jpg" alt="Tournament Champion" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a183d]/90 via-[#0a183d]/25 to-transparent pointer-events-none"></div>
+        
+        <!-- Top Badge -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+          <span class="px-2.5 py-1 rounded-full bg-blue-700/90 text-white text-[11px] font-bold tracking-wide shadow-md backdrop-blur-md flex items-center gap-1">
+            👑 Championship Glory
+          </span>
+          <span class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+          </span>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-white z-10 pointer-events-none">
+          <p class="text-[11px] font-bold tracking-wider uppercase text-[#F39200] mb-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @KinzaPakistan
+          </p>
+          <h4 class="font-bold text-white text-base leading-tight drop-shadow-sm mb-1">Tournament Champion</h4>
+          <p class="text-xs text-white/80 line-clamp-1">Women's singles champion receiving official Kinza honors</p>
+        </div>
+      </div>
+    </div>
+  
+    </div>
+  </div>
 </section>
+
+<!-- Movement Photo Lightbox Modal -->
+<div id="movementModal" class="fixed inset-0 z-50 bg-[#0a183d]/85 backdrop-blur-md hidden items-center justify-center p-4 transition-opacity duration-300">
+  <div class="relative max-w-2xl w-full bg-white rounded-3xl overflow-hidden shadow-2xl border border-white/20 transform transition-transform duration-300 scale-95" id="movementModalBox">
+    <button onclick="closeMovementModal()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/80 transition-colors focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div class="w-full h-80 sm:h-96 overflow-hidden bg-black relative">
+      <img id="movementModalImg" src="" alt="Kinza Event" class="w-full h-full object-contain"/>
+      <div class="absolute top-4 left-4">
+        <span id="movementModalBadge" class="px-3 py-1 rounded-full bg-[#143588] text-white text-xs font-bold shadow-md"></span>
+      </div>
+    </div>
+    <div class="p-6 bg-white">
+      <h3 id="movementModalTitle" class="text-xl font-bold text-deep-navy mb-1"></h3>
+      <p id="movementModalDesc" class="text-sm text-slate-600 mb-4"></p>
+      <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+        <span class="text-xs font-bold text-[#143588] flex items-center gap-1.5">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @KinzaPakistan
+        </span>
+        <a href="https://instagram.com/kinzapakistan" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#F39200] to-[#E55300] hover:brightness-110 text-white text-xs font-bold transition-all shadow-md flex items-center gap-1.5">
+          View on Instagram
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Where to Buy & Store Locator -->
 <section class="py-24 relative" id="where-to-buy">
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
@@ -857,6 +1597,276 @@ Live the <span class="text-orange-burst">Kinza</span> Vibe in Pakistan
             }
         }, 1200);
     };
+
+    
+    // 3D Movement Marquee Data & Lightbox Logic
+    const movementCardsData = [
+  {
+    "img": "images/kinza_event_1.jpg",
+    "badge": "🎾 Padel Arena",
+    "badgeColor": "bg-blue-600/90",
+    "title": "Kinza Court Activation",
+    "desc": "Official tournament court with Kinza courtside branding",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_2.jpg",
+    "badge": "✨ Night Match",
+    "badgeColor": "bg-amber-600/90",
+    "title": "Action Under the Lights",
+    "desc": "Kinza glass court illuminated for championship matches",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_3.jpg",
+    "badge": "💙 Kinza Gift Pack",
+    "badgeColor": "bg-[#143588]/90",
+    "title": "Smiles with Kinza",
+    "desc": "Brand ambassador with signature blue Kinza presentation pack",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_4.jpg",
+    "badge": "🏆 APCCL Youth",
+    "badgeColor": "bg-emerald-600/90",
+    "title": "Next Gen Champions",
+    "desc": "Young sports stars sporting custom Kinza tournament jerseys",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_5.jpg",
+    "badge": "⚡ Flavors Lineup",
+    "badgeColor": "bg-orange-600/90",
+    "title": "Ice-Cold Refreshment",
+    "desc": "Kinza Lemon, Pomegranate & Citrus powering every game",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_6.jpg",
+    "badge": "🌟 Player of the Match",
+    "badgeColor": "bg-purple-600/90",
+    "title": "Victory Celebration",
+    "desc": "Special edition Kinza box awarded to top performers",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_7.jpg",
+    "badge": "🥤 Kinza Chill",
+    "badgeColor": "bg-pink-600/90",
+    "title": "Double Refreshment",
+    "desc": "Pomegranate & Cola — pure flavor after intense matches",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_8.jpg",
+    "badge": "🤝 Community Spirit",
+    "badgeColor": "bg-indigo-600/90",
+    "title": "The Kinza Community",
+    "desc": "Connecting athletes, fans, and creators across Pakistan",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_9.jpg",
+    "badge": "🥇 Golden Taste",
+    "badgeColor": "bg-amber-500/90",
+    "title": "Premium Moments",
+    "desc": "Signature Kinza cans and luxury gift presentation packs",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_10.jpg",
+    "badge": "🎁 Event Stacks",
+    "badgeColor": "bg-[#143588]/90",
+    "title": "Ready for the Winners",
+    "desc": "Iconic blue Kinza gift packs lined up for presentation",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_11.jpg",
+    "badge": "🏅 APCCL Season 2",
+    "badgeColor": "bg-red-600/90",
+    "title": "Grand Presentation",
+    "desc": "Honoring tournament finalists with exclusive Kinza awards",
+    "tag": "@KinzaPakistan"
+  },
+  {
+    "img": "images/kinza_event_12.jpg",
+    "badge": "👑 Championship Glory",
+    "badgeColor": "bg-blue-700/90",
+    "title": "Tournament Champion",
+    "desc": "Women's singles champion receiving official Kinza honors",
+    "tag": "@KinzaPakistan"
+  }
+];
+
+    const track = document.getElementById('movement3DTrack');
+    const playPauseBtn = document.getElementById('move3dPlayPause');
+    const playPauseIcon = document.getElementById('playPauseIcon');
+    const playPauseText = document.getElementById('playPauseText');
+    const prevBtn = document.getElementById('move3dPrev');
+    const nextBtn = document.getElementById('move3dNext');
+
+    let isPaused = false;
+    if (playPauseBtn && track) {
+        playPauseBtn.addEventListener('click', () => {
+            isPaused = !isPaused;
+            if (isPaused) {
+                track.classList.add('is-paused');
+                playPauseIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+                playPauseText.textContent = 'Resume 3D Stream';
+                playPauseBtn.classList.add('bg-amber-50', 'text-amber-700', 'border-amber-300');
+            } else {
+                track.classList.remove('is-paused');
+                playPauseIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+                playPauseText.textContent = 'Pause 3D Stream';
+                playPauseBtn.classList.remove('bg-amber-50', 'text-amber-700', 'border-amber-300');
+            }
+        });
+    }
+
+    function nudgeTrack(delta) {
+        if (!track) return;
+        track.classList.add('is-paused');
+        isPaused = true;
+        if (playPauseIcon) playPauseIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        if (playPauseText) playPauseText.textContent = 'Resume 3D Stream';
+        if (playPauseBtn) playPauseBtn.classList.add('bg-amber-50', 'text-amber-700', 'border-amber-300');
+        
+        try {
+            const style = window.getComputedStyle(track);
+            const matrix = (window.WebKitCSSMatrix) ? new WebKitCSSMatrix(style.transform) : new DOMMatrix(style.transform);
+            let currentX = matrix.m41 || 0;
+            let targetX = currentX + delta;
+            const halfWidth = (track.scrollWidth || 3600) / 2;
+            if (targetX > 0) targetX = -halfWidth + (targetX % halfWidth);
+            if (targetX < -halfWidth) targetX = targetX % halfWidth;
+            
+            track.style.animation = 'none';
+            track.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+            track.style.transform = 'translate3d(' + targetX + 'px, 0, 0)';
+        } catch(e) {
+            console.warn(e);
+        }
+    }
+
+    if (prevBtn && track) {
+        prevBtn.addEventListener('click', () => nudgeTrack(320));
+    }
+
+    if (nextBtn && track) {
+        nextBtn.addEventListener('click', () => nudgeTrack(-320));
+    }
+
+    // Touch & Drag Support
+    let isDragging = false;
+    let startX = 0;
+    let dragStartX = 0;
+    let hasDragged = false;
+
+    track?.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        hasDragged = false;
+        startX = e.pageX;
+        try {
+            const style = window.getComputedStyle(track);
+            const matrix = (window.WebKitCSSMatrix) ? new WebKitCSSMatrix(style.transform) : new DOMMatrix(style.transform);
+            dragStartX = matrix.m41 || 0;
+            track.style.animation = 'none';
+            track.style.transition = 'none';
+            track.classList.add('cursor-grabbing');
+        } catch(err) {}
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging || !track) return;
+        const diff = e.pageX - startX;
+        if (Math.abs(diff) > 5) hasDragged = true;
+        let newX = dragStartX + diff;
+        const halfWidth = (track.scrollWidth || 3600) / 2;
+        if (newX > 0) newX = -halfWidth + (newX % halfWidth);
+        if (newX < -halfWidth) newX = newX % halfWidth;
+        track.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        track?.classList.remove('cursor-grabbing');
+    });
+
+    track?.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        hasDragged = false;
+        startX = e.touches[0].pageX;
+        try {
+            const style = window.getComputedStyle(track);
+            const matrix = (window.WebKitCSSMatrix) ? new WebKitCSSMatrix(style.transform) : new DOMMatrix(style.transform);
+            dragStartX = matrix.m41 || 0;
+            track.style.animation = 'none';
+            track.style.transition = 'none';
+        } catch(err) {}
+    }, { passive: true });
+
+    track?.addEventListener('touchmove', (e) => {
+        if (!isDragging || !track) return;
+        const diff = e.touches[0].pageX - startX;
+        if (Math.abs(diff) > 5) hasDragged = true;
+        let newX = dragStartX + diff;
+        const halfWidth = (track.scrollWidth || 3600) / 2;
+        if (newX > 0) newX = -halfWidth + (newX % halfWidth);
+        if (newX < -halfWidth) newX = newX % halfWidth;
+        track.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
+    }, { passive: true });
+
+    track?.addEventListener('touchend', () => {
+        isDragging = false;
+    });
+
+    // Lightbox modal logic
+    window.openMovementModal = function(index) {
+        const item = movementCardsData[index];
+        if (!item) return;
+        const modal = document.getElementById('movementModal');
+        const modalBox = document.getElementById('movementModalBox');
+        const modalImg = document.getElementById('movementModalImg');
+        const modalBadge = document.getElementById('movementModalBadge');
+        const modalTitle = document.getElementById('movementModalTitle');
+        const modalDesc = document.getElementById('movementModalDesc');
+
+        modalImg.src = item.img;
+        modalBadge.textContent = item.badge;
+        modalTitle.textContent = item.title;
+        modalDesc.textContent = item.desc;
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+            modalBox.classList.remove('scale-95');
+            modalBox.classList.add('scale-100');
+        }, 10);
+    };
+
+    window.closeMovementModal = function() {
+        const modal = document.getElementById('movementModal');
+        const modalBox = document.getElementById('movementModalBox');
+        if (!modal) return;
+        modalBox.classList.remove('scale-100');
+        modalBox.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }, 200);
+    };
+
+    // Close modal on backdrop click or ESC
+    document.getElementById('movementModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'movementModal') {
+            closeMovementModal();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMovementModal();
+    });
 
     window.resetMap = function() {
         if (!map) return;
