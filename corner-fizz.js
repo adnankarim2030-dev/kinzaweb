@@ -1,11 +1,11 @@
 /**
- * Kinza Beverage - Dynamic Carbonation Bubble Engine (v10.0)
- * Perfectly tuned for visibility & elegance:
+ * Kinza Beverage - Dynamic Carbonation Bubble Engine (v11.0)
+ * Perfectly balanced for subtlety & elegance:
  * 1. z-index: 35 (visible above page backgrounds, behind nav & modals z-50)
  * 2. pointer-events: none (zero interference with clicking or scrolling)
- * 3. Quantity: 35 - 50 bubbles on desktop, 25 - 35 on mobile
+ * 3. Subtle balanced quantity: 15 - 22 bubbles on desktop, 10 - 14 on mobile
  * 4. Crisp 3D gas bubble gradient with specular reflection
- * 5. Smooth 6-second wave loop with continuous floating
+ * 5. Gentle 8.5-second wave interval so screen is never crowded
  */
 
 (function() {
@@ -18,7 +18,7 @@
     let burstRings = [];
     let waveTimerId = null;
 
-    const WAVE_INTERVAL = 6000; // 6 seconds loop for continuous lively refreshment
+    const WAVE_INTERVAL = 8500; // 8.5 seconds gentle loop
 
     function init() {
         if (!document.body) {
@@ -56,16 +56,16 @@
 
     function spawnInitialBubbles() {
         const isMobile = width < 768;
-        const count = isMobile ? 30 : 45;
+        const count = isMobile ? 12 : 18;
 
         for (let i = 0; i < count; i++) {
             const startX = Math.random() * width;
             // Distribute across screen vertically on first load
             const startY = Math.random() * height;
-            const targetTopY = 20 + Math.random() * 80;
-            const speedY = 1.8 + Math.random() * 2.2;
-            const lateralDrift = (Math.random() - 0.5) * 0.6;
-            const radius = 3 + Math.random() * 5.5;
+            const targetTopY = 25 + Math.random() * 80;
+            const speedY = 1.6 + Math.random() * 2.0;
+            const lateralDrift = (Math.random() - 0.5) * 0.5;
+            const radius = 2.5 + Math.random() * 4.5;
 
             bubbles.push({
                 x: startX,
@@ -75,8 +75,8 @@
                 radius: radius,
                 wobblePhase: Math.random() * Math.PI * 2,
                 wobbleSpeed: 0.02 + Math.random() * 0.04,
-                wobbleAmp: 0.5 + Math.random() * 0.8,
-                alpha: 0.5 + Math.random() * 0.35,
+                wobbleAmp: 0.4 + Math.random() * 0.6,
+                alpha: 0.45 + Math.random() * 0.3,
                 targetTopY: targetTopY
             });
         }
@@ -84,17 +84,17 @@
 
     function triggerGasWave() {
         const isMobile = width < 768;
-        // Increased quantity: 25-35 on mobile, 35-50 on desktop
-        const count = isMobile ? (25 + Math.floor(Math.random() * 10)) : (35 + Math.floor(Math.random() * 15));
+        // Subtle balanced quantity: 10-14 on mobile, 15-22 on desktop
+        const count = isMobile ? (10 + Math.floor(Math.random() * 5)) : (15 + Math.floor(Math.random() * 8));
 
         for (let i = 0; i < count; i++) {
             const startX = Math.random() * width;
-            const startY = height + 10 + Math.random() * 150;
-            const targetTopY = 20 + Math.random() * 100;
-            const speedY = 1.8 + Math.random() * 2.4;
-            const lateralDrift = (Math.random() - 0.5) * 0.6;
+            const startY = height + 10 + Math.random() * 120;
+            const targetTopY = 25 + Math.random() * 90;
+            const speedY = 1.6 + Math.random() * 2.2;
+            const lateralDrift = (Math.random() - 0.5) * 0.5;
 
-            const radius = isMobile ? (2.8 + Math.random() * 4.5) : (3.2 + Math.random() * 5.5);
+            const radius = isMobile ? (2.5 + Math.random() * 3.8) : (2.8 + Math.random() * 4.8);
 
             bubbles.push({
                 x: startX,
@@ -104,8 +104,8 @@
                 radius: radius,
                 wobblePhase: Math.random() * Math.PI * 2,
                 wobbleSpeed: 0.02 + Math.random() * 0.04,
-                wobbleAmp: 0.5 + Math.random() * 0.8,
-                alpha: 0.55 + Math.random() * 0.35,
+                wobbleAmp: 0.4 + Math.random() * 0.6,
+                alpha: 0.48 + Math.random() * 0.3,
                 targetTopY: targetTopY
             });
         }
