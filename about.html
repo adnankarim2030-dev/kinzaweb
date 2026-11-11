@@ -57,7 +57,42 @@
         .animate-float {
             animation: none !important;
         }
-    </style>
+    
+        /* ========================================================
+           PREMIUM SMOOTH SCROLL REVEAL (Sections, Headings & Text)
+           ======================================================== */
+        .scroll-reveal-section {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .scroll-reveal-text {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .scroll-reveal-card {
+            opacity: 0;
+            transform: translateY(28px) scale(0.97);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .delay-100 { transition-delay: 100ms !important; }
+        .delay-150 { transition-delay: 150ms !important; }
+        .delay-200 { transition-delay: 200ms !important; }
+        .delay-300 { transition-delay: 300ms !important; }
+        .delay-400 { transition-delay: 400ms !important; }
+
+        .is-revealed {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+        }
+        .anim-done {
+            will-change: auto !important;
+        }
+</style>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -221,9 +256,9 @@
         </a>
     </div>
 </div>
-<nav class="fixed top-12 sm:top-14 left-1/2 -translate-x-1/2 w-[90%] max-w-container-max rounded-full border border-pure-white/20 bg-pure-white/70 backdrop-blur-xl flex justify-between items-center px-6 sm:px-8 py-3 sm:py-4 z-50 shadow-xl shadow-cola-blue/10" id="TopNavBar">
+<nav class="fixed top-12 sm:top-14 left-1/2 -translate-x-1/2 w-[92%] sm:w-[90%] max-w-container-max rounded-full border border-pure-white/20 bg-pure-white/75 backdrop-blur-xl flex justify-between items-center px-4 sm:px-8 py-2.5 sm:py-3.5 z-50 shadow-xl shadow-cola-blue/10 transition-all duration-300" id="TopNavBar">
 <div class="flex items-center gap-3">
-<img alt="Kinza Logo" class="h-16 w-auto hover:scale-105 transition-transform duration-300 object-contain mix-blend-multiply" src="images/kinza_logo_arabic.png"/>
+<img alt="Kinza Logo" class="h-11 sm:h-14 md:h-16 w-auto hover:scale-105 transition-transform duration-300 object-contain mix-blend-multiply" src="images/kinza_logo_arabic.png"/>
 <div class="relative flex items-center flag-wave-anim ml-2 sm:ml-4 shrink-0">
   <span class="absolute inline-flex h-full w-full rounded-full bg-pure-white/40 animate-ping"></span>
   <span class="relative flex items-center gap-2 sm:gap-3 bg-pure-white/95 text-[10px] sm:text-xs text-deep-navy font-bold px-3 sm:px-5 py-1.5 sm:py-2 rounded-full border border-gray-200 shadow-md flag-shine-anim backdrop-blur-md">
@@ -271,7 +306,7 @@
         </button>
 </nav>
 <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed top-[110px] sm:top-32 left-1/2 -translate-x-1/2 w-[90%] bg-pure-white/95 dark:bg-black/95 backdrop-blur-2xl rounded-2xl border border-pure-white/20 p-6 z-40 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-4 md:hidden">
+        <div id="mobile-menu" class="fixed top-[84px] sm:top-28 left-1/2 -translate-x-1/2 w-[92%] sm:w-[90%] bg-pure-white/95 dark:bg-black/95 backdrop-blur-2xl rounded-3xl border border-pure-white/20 p-6 z-40 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none -translate-y-4 md:hidden">
             <div class="flex flex-col gap-3">
                 <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-on-surface-variant hover:text-primary hover:pl-2" href="/">Home</a>
                 <a class="font-label-lg text-lg py-2.5 border-b border-surface-variant/10 transition-all duration-300 text-primary font-bold border-l-4 border-orange-burst pl-3" href="about">About Us</a>
@@ -611,7 +646,93 @@ From the Kingdom of Saudia Arabia to the<br/><span class="text-orange-burst">Hea
             observer.observe(el);
         });
     </script>
-<!-- Mobile Menu Script -->
+<script>
+        // Micro-interaction for navbar scroll effect (Fixed mobile overlap)
+        const topNav = document.getElementById('TopNavBar') || document.querySelector('nav');
+        if (topNav) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    topNav.classList.add('scale-95', 'top-2', 'py-2');
+                    topNav.classList.remove('top-12', 'sm:top-14', 'py-2.5', 'sm:py-3.5');
+                } else {
+                    topNav.classList.remove('scale-95', 'top-2', 'py-2');
+                    topNav.classList.add('top-12', 'sm:top-14', 'py-2.5', 'sm:py-3.5');
+                }
+            }, { passive: true });
+        }
+
+        // Section & Text Scroll Reveal Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const animTargets = [];
+
+            // 1. Observe Sections & Footer
+            document.querySelectorAll('section, footer, header').forEach((sec) => {
+                const rect = sec.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    sec.classList.add('is-revealed');
+                } else {
+                    sec.classList.add('scroll-reveal-section');
+                    animTargets.push(sec);
+                }
+            });
+
+            // 2. Observe Headings, Titles and Paragraphs
+            document.querySelectorAll('section h1, section h2, section h3, section p, header h1, header p, .section-title').forEach((textEl) => {
+                if (textEl.closest('#mobile-menu') || textEl.closest('nav') || textEl.closest('.leaflet-popup-content')) return;
+
+                const rect = textEl.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    textEl.classList.add('is-revealed');
+                } else {
+                    textEl.classList.add('scroll-reveal-text');
+                    if (textEl.tagName.toLowerCase() === 'p') {
+                        textEl.classList.add('delay-150');
+                    }
+                    animTargets.push(textEl);
+                }
+            });
+
+            // 3. Observe Cards
+            document.querySelectorAll('.aspect-\[16\/9\], .aspect-square, .glass-card, .reveal-card, .flavor-card-hover').forEach((card, idx) => {
+                if (card.closest('nav')) return;
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    card.classList.add('is-revealed');
+                } else {
+                    card.classList.add('scroll-reveal-card');
+                    const stagger = (idx % 3) * 100;
+                    if (stagger > 0) {
+                        card.classList.add(`delay-${stagger}`);
+                    }
+                    animTargets.push(card);
+                }
+            });
+
+            if (prefersReducedMotion) {
+                animTargets.forEach(el => el.classList.add('is-revealed'));
+                return;
+            }
+
+            const revealObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        setTimeout(() => {
+                            entry.target.classList.add('anim-done');
+                        }, 900);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            animTargets.forEach(el => revealObserver.observe(el));
+        });
+</script>\n<!-- Mobile Menu Script -->
         <script>
         document.addEventListener('DOMContentLoaded', () => {
             const menuBtn = document.getElementById('mobile-menu-btn');
