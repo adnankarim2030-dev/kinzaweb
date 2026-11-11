@@ -1,10 +1,11 @@
 /**
- * Kinza Beverage - Transparent Gas Carbonation Bubble Wave & Burst Engine
- * Features:
- * 1. Transparent Gas Micro-Bubbles (Size: 3px - 9.5px).
- * 2. Rise from BOTTOM to TOP.
- * 3. Burst/Pop at the TOP with water splash droplets & rings.
- * 4. Repeats automatically every 10 seconds.
+ * Kinza Beverage - Ultra-Subtle Ambient Carbonation Fizz Engine (v9.0)
+ * Refined for luxury, distraction-free aesthetic:
+ * 1. Low Z-Index (z-index: 0) - floats behind cards & text, never covering readable content.
+ * 2. Delicate Micro-Bubbles (2px - 6.5px).
+ * 3. Minimal bubble count (Mobile: 6-10 bubbles, Desktop: 12-18 bubbles).
+ * 4. Soft translucent opacity (0.2 - 0.4).
+ * 5. Calm 22-second ambient cycle.
  */
 
 (function() {
@@ -17,7 +18,7 @@
     let burstRings = [];
     let waveTimerId = null;
 
-    const WAVE_INTERVAL = 10000; // 10 seconds loop
+    const WAVE_INTERVAL = 22000; // 22 seconds ambient cycle (calm, non-distracting)
 
     function init() {
         if (!document.body) {
@@ -29,7 +30,8 @@
 
         canvas = document.createElement('canvas');
         canvas.id = 'corner-fizz-canvas';
-        canvas.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;pointer-events:none;z-index:999999;';
+        // z-index: 0 ensures it stays in the ambient background behind cards & text
+        canvas.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.6;';
         document.body.appendChild(canvas);
 
         ctx = canvas.getContext('2d');
@@ -37,14 +39,13 @@
         resize();
         window.addEventListener('resize', resize);
 
-        // Start first wave of gas bubbles immediately
+        // Initial soft wave
         triggerGasWave();
 
-        // Repeat every 10 seconds
+        // Calm, spaced repetition
         waveTimerId = setInterval(triggerGasWave, WAVE_INTERVAL);
 
         requestAnimationFrame(render);
-        console.log('🫧 Kinza 10-Second Gas Bubble Wave Engine Active');
     }
 
     function resize() {
@@ -54,18 +55,19 @@
     }
 
     function triggerGasWave() {
-        // Staggered wave of delicate gas bubbles
-        const count = 50 + Math.floor(Math.random() * 20); // 50 to 70 delicate gas bubbles
+        const isMobile = width < 768;
+        // Ultra-subtle count: only 6-10 on mobile, 12-18 on desktop
+        const count = isMobile ? (6 + Math.floor(Math.random() * 4)) : (12 + Math.floor(Math.random() * 6));
 
         for (let i = 0; i < count; i++) {
             const startX = Math.random() * width;
-            const startY = height + 10 + Math.random() * 160;
-            const targetTopY = 20 + Math.random() * 100;
-            const speedY = 2.2 + Math.random() * 3.2;
-            const lateralDrift = (Math.random() - 0.5) * 0.7;
+            const startY = height + 10 + Math.random() * 120;
+            const targetTopY = 30 + Math.random() * 120;
+            const speedY = 1.3 + Math.random() * 1.6; // gentle, relaxing rise
+            const lateralDrift = (Math.random() - 0.5) * 0.4;
 
-            // Small, delicate gas bubble size (3px to 9.5px)
-            const radius = 3 + Math.random() * 6.5;
+            // Small, delicate micro-bubble size (2px to 6.5px)
+            const radius = isMobile ? (2 + Math.random() * 3.5) : (2.5 + Math.random() * 4);
 
             bubbles.push({
                 x: startX,
@@ -74,39 +76,40 @@
                 vy: -speedY,
                 radius: radius,
                 wobblePhase: Math.random() * Math.PI * 2,
-                wobbleSpeed: 0.03 + Math.random() * 0.04,
-                wobbleAmp: 0.5 + Math.random() * 1.0,
-                alpha: 0.5 + Math.random() * 0.35,
+                wobbleSpeed: 0.02 + Math.random() * 0.03,
+                wobbleAmp: 0.3 + Math.random() * 0.6,
+                alpha: 0.22 + Math.random() * 0.2, // soft, translucent
                 targetTopY: targetTopY
             });
         }
     }
 
     function spawnPopEffect(x, y, radius) {
-        const dropletCount = 5 + Math.floor(radius * 0.8);
+        // Minimal, subtle burst (only 2-3 tiny droplets)
+        const dropletCount = 2 + Math.floor(Math.random() * 2);
         for (let i = 0; i < dropletCount; i++) {
-            const angle = (Math.PI * 2 / dropletCount) * i + (Math.random() - 0.5) * 0.8;
-            const speed = 1.2 + Math.random() * 2.2;
+            const angle = (Math.PI * 2 / dropletCount) * i + (Math.random() - 0.5) * 0.5;
+            const speed = 0.8 + Math.random() * 1.2;
             popEffects.push({
                 x: x,
                 y: y,
                 vx: Math.cos(angle) * speed,
                 vy: Math.sin(angle) * speed,
-                radius: Math.max(1.0, radius * 0.2 + Math.random() * 1.2),
-                alpha: 0.85,
-                decay: 0.03 + Math.random() * 0.03,
-                gravity: 0.04
+                radius: Math.max(0.8, radius * 0.2),
+                alpha: 0.45,
+                decay: 0.04 + Math.random() * 0.02,
+                gravity: 0.03
             });
         }
 
         burstRings.push({
             x: x,
             y: y,
-            radius: radius * 0.3,
-            maxRadius: radius * 3.5,
-            alpha: 0.7,
-            lineWidth: Math.max(1.0, radius * 0.18),
-            expandSpeed: 1.8 + radius * 0.12
+            radius: radius * 0.4,
+            maxRadius: radius * 2.4,
+            alpha: 0.35,
+            lineWidth: Math.max(0.75, radius * 0.12),
+            expandSpeed: 1.2 + radius * 0.08
         });
     }
 
@@ -114,7 +117,7 @@
         ctx.save();
         ctx.globalAlpha = b.alpha;
 
-        // 1. Transparent Gas Bubble Radial Gradient
+        // 1. Transparent Soft Gas Radial Gradient
         const radGrad = ctx.createRadialGradient(
             b.x - b.radius * 0.3,
             b.y - b.radius * 0.3,
@@ -124,10 +127,10 @@
             b.radius
         );
 
-        radGrad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
-        radGrad.addColorStop(0.3, 'rgba(224, 242, 254, 0.35)');
-        radGrad.addColorStop(0.75, 'rgba(56, 189, 248, 0.12)');
-        radGrad.addColorStop(1, 'rgba(14, 165, 233, 0.35)');
+        radGrad.addColorStop(0, 'rgba(255, 255, 255, 0.7)');
+        radGrad.addColorStop(0.35, 'rgba(224, 242, 254, 0.25)');
+        radGrad.addColorStop(0.8, 'rgba(56, 189, 248, 0.08)');
+        radGrad.addColorStop(1, 'rgba(14, 165, 233, 0.25)');
 
         ctx.fillStyle = radGrad;
         ctx.beginPath();
@@ -135,22 +138,22 @@
         ctx.fill();
 
         // 2. Fine Transparent Contour Edge
-        ctx.strokeStyle = 'rgba(14, 116, 144, 0.45)';
-        ctx.lineWidth = Math.max(0.75, b.radius * 0.1);
+        ctx.strokeStyle = 'rgba(14, 116, 144, 0.3)';
+        ctx.lineWidth = Math.max(0.6, b.radius * 0.08);
         ctx.stroke();
 
-        // 3. Top-Left Specular Glare Arc (3D Glass Reflection)
+        // 3. Specular Glare Arc
         if (b.radius > 2.5) {
             ctx.beginPath();
             ctx.arc(
                 b.x - b.radius * 0.28,
                 b.y - b.radius * 0.28,
-                b.radius * 0.55,
+                b.radius * 0.5,
                 Math.PI * 1.1,
                 Math.PI * 1.65
             );
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-            ctx.lineWidth = Math.max(0.8, b.radius * 0.18);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+            ctx.lineWidth = Math.max(0.6, b.radius * 0.14);
             ctx.stroke();
         }
 
@@ -168,9 +171,9 @@
             b.y += b.vy;
 
             b.wobblePhase += b.wobbleSpeed;
-            b.x += Math.sin(b.wobblePhase) * b.wobbleAmp * 0.05;
+            b.x += Math.sin(b.wobblePhase) * b.wobbleAmp * 0.03;
 
-            // When bubble reaches the top region, POP / BURST it!
+            // When bubble reaches top region, softly pop
             if (b.y <= b.targetTopY || b.y <= 15) {
                 spawnPopEffect(b.x, b.y, b.radius);
                 bubbles.splice(i, 1);
@@ -183,8 +186,8 @@
         for (let i = burstRings.length - 1; i >= 0; i--) {
             const ring = burstRings[i];
             ring.radius += ring.expandSpeed;
-            ring.alpha -= 0.04;
-            ring.lineWidth *= 0.94;
+            ring.alpha -= 0.03;
+            ring.lineWidth *= 0.95;
 
             if (ring.alpha <= 0 || ring.radius >= ring.maxRadius) {
                 burstRings.splice(i, 1);
@@ -195,7 +198,7 @@
             ctx.globalAlpha = ring.alpha;
             ctx.beginPath();
             ctx.arc(ring.x, ring.y, ring.radius, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(56, 189, 248, 0.65)';
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
             ctx.lineWidth = ring.lineWidth;
             ctx.stroke();
             ctx.restore();
@@ -216,7 +219,7 @@
 
             ctx.save();
             ctx.globalAlpha = pop.alpha;
-            ctx.fillStyle = 'rgba(56, 189, 248, 0.75)';
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
             ctx.beginPath();
             ctx.arc(pop.x, pop.y, pop.radius, 0, Math.PI * 2);
             ctx.fill();
