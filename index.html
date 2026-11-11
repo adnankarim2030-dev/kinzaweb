@@ -56,38 +56,19 @@
         }
     
         /* ========================================================
-           PREMIUM SMOOTH SCROLL REVEAL (Sections, Headings & Text)
+           BULLETPROOF SMOOTH SCROLL REVEAL (Sections, Headings & Cards)
            ======================================================== */
-        .scroll-reveal-section {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .scroll-reveal-text {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .scroll-reveal-card {
-            opacity: 0;
-            transform: translateY(28px) scale(0.97);
+        .scroll-reveal {
+            opacity: 1; /* Fallback: always visible by default */
             transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
         }
-        .delay-100 { transition-delay: 100ms !important; }
-        .delay-150 { transition-delay: 150ms !important; }
-        .delay-200 { transition-delay: 200ms !important; }
-        .delay-300 { transition-delay: 300ms !important; }
-        .delay-400 { transition-delay: 400ms !important; }
-
-        .is-revealed {
+        .scroll-reveal.will-reveal {
+            opacity: 0 !important;
+            transform: translateY(25px) !important;
+        }
+        .scroll-reveal.is-revealed {
             opacity: 1 !important;
-            transform: translateY(0) scale(1) !important;
-        }
-        .anim-done {
-            will-change: auto !important;
+            transform: translateY(0) !important;
         }
 </style>
 <script id="tailwind-config">
@@ -820,76 +801,43 @@
             }, { passive: true });
         }
 
-        // Section & Text Scroll Reveal Animations
+        // Bulletproof Section & Content Scroll Reveal
         document.addEventListener('DOMContentLoaded', () => {
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const animTargets = [];
+            const targets = document.querySelectorAll('section > div, .aspect-\\[16\\/9\\], .aspect-square, .glass-card, .reveal-card, .flavor-card-hover');
+            const toObserve = [];
 
-            // 1. Observe Sections & Footer
-            document.querySelectorAll('section, footer, header').forEach((sec) => {
-                const rect = sec.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    sec.classList.add('is-revealed');
-                } else {
-                    sec.classList.add('scroll-reveal-section');
-                    animTargets.push(sec);
+            targets.forEach(el => {
+                // Do not hide 3D stream, nav, or modal
+                if (el.closest('.movement-3d-track') || el.closest('#mobile-menu') || el.closest('nav') || el.closest('#site-opener')) return;
+                
+                const rect = el.getBoundingClientRect();
+                // Only animate elements that are genuinely below the viewport fold
+                if (rect.top > window.innerHeight) {
+                    el.classList.add('scroll-reveal', 'will-reveal');
+                    toObserve.push(el);
                 }
             });
 
-            // 2. Observe Headings, Titles and Paragraphs
-            document.querySelectorAll('section h1, section h2, section h3, section p, header h1, header p, .section-title').forEach((textEl) => {
-                if (textEl.closest('#mobile-menu') || textEl.closest('nav') || textEl.closest('.leaflet-popup-content')) return;
+            if ('IntersectionObserver' in window && toObserve.length > 0) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-revealed');
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '80px 0px 80px 0px', // triggers slightly BEFORE appearing
+                    threshold: 0.01 // triggers immediately
+                });
 
-                const rect = textEl.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    textEl.classList.add('is-revealed');
-                } else {
-                    textEl.classList.add('scroll-reveal-text');
-                    if (textEl.tagName.toLowerCase() === 'p') {
-                        textEl.classList.add('delay-150');
-                    }
-                    animTargets.push(textEl);
-                }
-            });
-
-            // 3. Observe Cards
-            document.querySelectorAll('.aspect-\[16\/9\], .aspect-square, .glass-card, .reveal-card, .flavor-card-hover').forEach((card, idx) => {
-                if (card.closest('nav')) return;
-                const rect = card.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    card.classList.add('is-revealed');
-                } else {
-                    card.classList.add('scroll-reveal-card');
-                    const stagger = (idx % 3) * 100;
-                    if (stagger > 0) {
-                        card.classList.add(`delay-${stagger}`);
-                    }
-                    animTargets.push(card);
-                }
-            });
-
-            if (prefersReducedMotion) {
-                animTargets.forEach(el => el.classList.add('is-revealed'));
-                return;
+                toObserve.forEach(el => observer.observe(el));
             }
 
-            const revealObserver = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-revealed');
-                        setTimeout(() => {
-                            entry.target.classList.add('anim-done');
-                        }, 900);
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, {
-                root: null,
-                threshold: 0.1,
-                rootMargin: '0px 0px -40px 0px'
-            });
-
-            animTargets.forEach(el => revealObserver.observe(el));
+            // Guaranteed fail-safe: reveal all content after 1.5s
+            setTimeout(() => {
+                document.querySelectorAll('.will-reveal').forEach(el => el.classList.add('is-revealed'));
+            }, 1500);
         });
 </script>\n<!-- Mobile Menu Script -->
         <script>
